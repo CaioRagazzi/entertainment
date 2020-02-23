@@ -1,16 +1,18 @@
 <template>
   <v-app>
     <v-content>
-      <SideBar />
       <NavBar />
-      <router-view></router-view>
+      <v-container>
+        <router-view></router-view>
+      </v-container>
+      <SideBar />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import NavBar from "./components/navBar/NavBar";
 import SideBar from "./components/sideBar/SideBar";
+import NavBar from "./components/navBar/NavBar";
 
 export default {
   name: "App",

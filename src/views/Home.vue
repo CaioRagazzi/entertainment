@@ -1,24 +1,13 @@
 <template>
-  <div>
-    <h1 v-for="movie in movies" :key="movie.id"> {{ movie.title }} </h1>
-  </div>
+  <GridUpComming />
 </template>
 
 <script>
-import { HTTP } from "../plugins/axios";
-
+import GridUpComming from "../components/movies/upComming/gridUpComming";
 export default {
   name: "Home",
-  data(){
-    return{
-      movies: []
-    }
-  },
-  created() {
-    HTTP.get("upcoming").then(res => {
-      this.movies = res.data.results
-      console.log(res.data.results);
-    });
+  components: {
+    GridUpComming
   }
 };
 </script>

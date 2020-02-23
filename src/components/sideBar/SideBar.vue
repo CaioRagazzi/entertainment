@@ -1,9 +1,5 @@
 <template>
-  <v-navigation-drawer fixed v-model="isOpen" @input="toggle">
-    <v-list>
-      <v-subheader>REPORTS</v-subheader>
-    </v-list>
-  </v-navigation-drawer>
+  <v-navigation-drawer fixed temporary v-model="isOpen" touchless></v-navigation-drawer>
 </template>
 
 <script>
@@ -12,30 +8,30 @@ import { mapActions } from "vuex";
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  computed:{
+  computed: {
     ...mapGetters({
       isSideBarOpen: "sideBar/isShow"
     }),
     isOpen: {
-      get: function () {
-        return this.isSideBarOpen
+      get: function() {
+        return this.isSideBarOpen;
       },
-      set: function () {
+      set: function(event) {
+        if (!event) {
+          this.toggle();
+        }
       }
     }
   },
   methods: {
-    toggle(event){
-      if (!event) {
-        this.toggleSideBar()
-      }
+    toggle() {
+      this.toggleSideBar();
     },
     ...mapActions({
       toggleSideBar: "sideBar/toggleSideBar"
-    }),
+    })
   }
 };
 </script>
