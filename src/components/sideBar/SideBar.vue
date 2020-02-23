@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer">
+  <v-navigation-drawer fixed v-model="isOpen" @input="toggle">
     <v-list>
       <v-subheader>REPORTS</v-subheader>
     </v-list>
@@ -7,11 +7,35 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      drawer: false
     };
+  },
+  computed:{
+    ...mapGetters({
+      isSideBarOpen: "sideBar/isShow"
+    }),
+    isOpen: {
+      get: function () {
+        return this.isSideBarOpen
+      },
+      set: function () {
+      }
+    }
+  },
+  methods: {
+    toggle(event){
+      if (!event) {
+        this.toggleSideBar()
+      }
+    },
+    ...mapActions({
+      toggleSideBar: "sideBar/toggleSideBar"
+    }),
   }
 };
 </script>
