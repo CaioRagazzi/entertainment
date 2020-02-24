@@ -2,7 +2,7 @@
   <div v-if="!loading">
     <v-row>
       <v-col cols="12" sm="5">
-        <v-img max-height="100%" max-width="100%" :src="getImageURL()" contain></v-img>
+        <v-img v-if="!loading" max-height="100%" max-width="100%" :src="getImageURL()" contain></v-img>
       </v-col>
       <v-col cols="12" sm="6">
         <p class="text-sm">

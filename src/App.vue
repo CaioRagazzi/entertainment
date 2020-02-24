@@ -13,6 +13,7 @@
 <script>
 import SideBar from "./components/sideBar/SideBar";
 import NavBar from "./components/navBar/NavBar";
+import { mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -20,8 +21,13 @@ export default {
     NavBar,
     SideBar
   },
-  data: () => ({
-    //
-  })
+  async created() {
+    this.getConfiguration()
+  },
+  methods: {
+    ...mapActions({
+      getConfiguration: "configuration/getConfiguration"
+    })
+  }
 };
 </script>

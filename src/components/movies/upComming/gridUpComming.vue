@@ -1,14 +1,13 @@
 <template>
   <div>
     <div class="d-flex flex-wrap justify-center">
-      <!-- <v-col cols="12" class="h-100"> -->
       <MovieCard
         v-for="movie in movies"
         :key="movie.id"
         :id="movie.id"
-        :image="baseUrl + poster_sizes[4] + movie.poster_path"
+        :image="movie.poster_path"
+        :loading="loading"
       />
-      <!-- </v-col> -->
     </div>
     <div>
       <v-pagination
@@ -36,22 +35,21 @@ export default {
       baseUrl: "",
       poster_sizes: [],
       currentPage: 1,
-      totalPages: 0
+      totalPages: 0,
+      loading: true
     };
   },
   created() {
     this.getMovies();
-    HTTP.get("configuration").then(res => {
-      this.poster_sizes = res.data.images.logo_sizes;
-      this.baseUrl = res.data.images.base_url;
-    });
   },
   methods: {
     getMovies() {
+      this.loading = true;
       HTTP.get("movie/upcoming", { params: { page: this.currentPage } }).then(
         res => {
           this.movies = res.data.results;
           this.totalPages = res.data.total_pages;
+          this.loading = false;
           console.log(res.data);
         }
       );
