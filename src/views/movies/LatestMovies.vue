@@ -21,9 +21,10 @@
 import { HTTP } from "../../plugins/axios";
 import MovieGrid from "../../components/movies/MovieGrid";
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
-  name: "UpCommingMovies",
+  name: "NowPlaying",
   components: {
     MovieGrid
   },
@@ -36,22 +37,36 @@ export default {
     };
   },
   created() {
-    this.setTitle("Upcomming Movies");
-    this.getMovies();
+    if (this.configuration.images === undefined) {
+      this.getConfiguration().then(() => {
+        this.getMovies();
+      });
+    } else {
+      this.getMovies();
+    }
+    this.setTitle("Now Playing");
+  },
+  computed: {
+    ...mapGetters({
+      configuration: "configuration/configuration"
+    })
   },
   methods: {
     ...mapActions({
-      setTitle: "navBar/setTitle"
+      setTitle: "navBar/setTitle",
+      getConfiguration: "configuration/getConfiguration"
     }),
     getMovies() {
       this.loading = true;
-      HTTP.get("movie/upcoming", { params: { page: this.currentPage } }).then(
-        res => {
-          this.movies = res.data.results;
-          this.totalPages = res.data.total_pages;
-          this.loading = false;
-        }
-      );
+      HTTP.get("movie/now_playing", {
+        params: { page: this.currentPage }
+      }).then(res => {
+        console.log(res);
+
+        this.movies = res.data.results;
+        this.totalPages = res.data.total_pages;
+        this.loading = false;
+      });
     },
     changePage(event) {
       this.currentPage = event;

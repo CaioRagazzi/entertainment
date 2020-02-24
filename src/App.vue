@@ -14,6 +14,7 @@
 import SideBar from "./components/sideBar/SideBar";
 import NavBar from "./components/navBar/NavBar";
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -21,12 +22,19 @@ export default {
     NavBar,
     SideBar
   },
-  async created() {
-    this.getConfiguration()
+  created() {
+    if (this.configuration.images === undefined) {
+      this.getConfiguration();
+    }
   },
   methods: {
     ...mapActions({
       getConfiguration: "configuration/getConfiguration"
+    })
+  },
+  computed: {
+    ...mapGetters({
+      configuration: "configuration/configuration"
     })
   }
 };

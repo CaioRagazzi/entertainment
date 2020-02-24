@@ -1,17 +1,27 @@
 import { HTTP } from "../../plugins/axios";
 
 const state = {
-    configuration: undefined,
+    configuration: {},
+    isLoading: true,
 }
 
 const getters = {
+    isLoading: state => {
+        return state.isLoading;
+    },
     configuration: state => {
-        return state.configuration
+        return state.configuration;
     },
     getImagePosterURL: state => {
         return (
             state.configuration.images.base_url +
             state.configuration.images.poster_sizes[4]
+        );
+    },
+    getImageBackdropURL: state => {
+        return (
+            state.configuration.images.base_url +
+            state.configuration.images.backdrop_sizes[2]
         );
     }
 }
@@ -19,13 +29,18 @@ const getters = {
 const mutations = {
     getConfiguration(state, configuration) {
         state.configuration = configuration;
+    },
+    setLoading(state, value) {
+        state.isLoading = value;
     }
 }
 
 const actions = {
     async getConfiguration({ commit }) {
+        commit('setLoading', true)
         await HTTP.get("configuration").then(res => {
             commit('getConfiguration', res.data)
+            commit('setLoading', false)
         });
     }
 }
