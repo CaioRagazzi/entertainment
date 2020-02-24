@@ -1,18 +1,24 @@
 <template>
   <v-app-bar app color="primary" dark v-model="show">
     <v-app-bar-nav-icon @click="toggleSideBar"></v-app-bar-nav-icon>
-    <v-toolbar-title>Page title</v-toolbar-title>
+    <v-toolbar-title> {{ title }} </v-toolbar-title>
   </v-app-bar>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       show: true
     };
+  },
+  computed:{
+    ...mapGetters({
+      title: "navBar/title"
+    })
   },
   methods: {
     ...mapActions({

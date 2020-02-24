@@ -2,7 +2,7 @@
   <v-app>
     <v-content>
       <NavBar />
-      <v-container>
+      <v-container fluid>
         <router-view></router-view>
       </v-container>
       <SideBar />
