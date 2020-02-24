@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import GridUpComming from "../components/movies/upComming/gridUpComming";
+import GridUpComming from "../../components/movies/upComming/gridUpComming";
 export default {
-  name: "Home",
+  name: "UpCommingMovies",
   components: {
     GridUpComming
   }

@@ -2,7 +2,7 @@
   <v-container>
     <v-col cols="12">
       <v-row align="center" justify="center" style="height: 300px;" dense>
-        <MovieCard v-for="movie in movies" :key="movie.id" :image="baseUrl + poster_sizes[4] + movie.poster_path" />
+        <MovieCard v-for="movie in movies" :key="movie.id" :id="movie.id" :image="baseUrl + poster_sizes[4] + movie.poster_path" />
       </v-row>
     </v-col>
   </v-container>
@@ -34,7 +34,7 @@ export default {
       this.poster_sizes = res.data.images.logo_sizes;
       this.baseUrl = res.data.images.base_url;
     });
-  }
+  },
 };
 </script>
 

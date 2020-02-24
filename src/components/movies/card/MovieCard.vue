@@ -1,19 +1,18 @@
 <template>
-  <v-card
-    :hover="true"
-    class="mb-5 mr-5"
-    max-height="500"
-    max-width="250"
-    shaped
-  >
-    <v-img class="white--text align-end" :src="image"></v-img>
+  <v-card @click="goToDetails" hover class="mb-5 mr-5" max-height="500" max-width="188" shaped>
+    <v-img :src="image"></v-img>
   </v-card>
 </template>
 
 <script>
 export default {
-    name: "MovieCard",
-    props: ["image"],
+  name: "MovieCard",
+  props: ["image", "id"],
+  methods: {
+    goToDetails() {
+      this.$router.push({ name: "MovieDetails", params: { id: this.id } });
+    }
+  }
 };
 </script>
 
