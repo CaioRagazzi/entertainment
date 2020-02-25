@@ -1,5 +1,6 @@
 <template>
   <v-container class="d-flex flex-wrap justify-center">
+    <v-progress-circular v-if="isVideoLoading" :size="50" color="primary" indeterminate></v-progress-circular>
     <iframe
       class="pl-2 pt-2"
       v-for="video in relatedVideos"
@@ -17,10 +18,11 @@ import { HTTP } from "../../plugins/axios";
 
 export default {
   name: "RelatedVideosDetails",
-  props: ["movie"],
+  props: ["id"],
   data() {
     return {
-      relatedVideos: []
+      relatedVideos: [],
+      isVideoLoading: true
     };
   },
   created() {
@@ -28,9 +30,20 @@ export default {
   },
   methods: {
     getVideos() {
-      HTTP.get(`movie/${this.movie.id}/videos`).then(res => {
+      this.isVideoLoading = true;
+      HTTP.get(`movie/${this.id}/videos`).then(res => {
         this.relatedVideos = res.data.results;
+        this.isVideoLoading = false;
       });
+    },
+    cleanFields(){
+      this.relatedVideos = []
+    }
+  },
+  watch: {
+    id: function() {
+      this.cleanFields();
+      this.getVideos();
     }
   }
 };
@@ -38,9 +51,9 @@ export default {
 
 <style scoped>
 iframe {
-    width: 25vw;
-    height: 30ch;
-  }
+  width: 25vw;
+  height: 30ch;
+}
 @media screen and (max-width: 600px) and (min-width: 100px) {
   iframe {
     width: 100%;

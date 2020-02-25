@@ -1,6 +1,6 @@
 <template>
   <v-container class="d-flex flex-wrap">
-    <div class="d-flex align-center" v-for="cast in casts" :key="cast.id">
+    <div class="d-flex align-center" v-for="cast in casts" :key="cast.cast_id">
       <div>
         <v-img class="mb-2 ml-3 my-img" :src="getImageProfileURL + cast.profile_path" width="8rem"></v-img>
       </div>
@@ -29,10 +29,11 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "CastDetails",
-  props: ["movie"],
+  props: ["id"],
   data() {
     return {
-      casts: []
+      casts: [],
+      isCastLoading: true
     };
   },
   created() {
@@ -44,12 +45,23 @@ export default {
     })
   },
   methods: {
-    async getCast() {
-      await HTTP.get(`movie/${this.movie.id}/credits`).then(res => {
+    getCast() {
+      this.isCastLoading = true;
+      HTTP.get(`movie/${this.id}/credits`).then(res => {
         this.casts = res.data.cast.filter(item => {
           return item.profile_path !== null;
         });
+        this.isCastLoading = false;
       });
+    },
+    cleanFields(){
+      this.casts = []
+    }
+  },
+  watch: {
+    id: function() {
+      this.cleanFields();
+      this.getCast();
     }
   }
 };

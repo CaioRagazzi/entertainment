@@ -1,7 +1,7 @@
 <template>
   <v-container class="container-details">
-    <v-card>
-      <v-tabs>
+    <v-card v-if="!isLoading">
+      <v-tabs v-model="CurrentTab">
         <v-tab>
           <v-icon left>mdi-filmstrip</v-icon>About
         </v-tab>
@@ -15,29 +15,33 @@
           <v-icon left>mdi-domain</v-icon>Similar Movies
         </v-tab>
         <v-tab-item>
-          <AboutDetails :movie="movie" />
+          <AboutDetails :id="getIdParam" />
         </v-tab-item>
         <v-tab-item>
-          <RelatedVideosDetails :movie="movie" />
+          <RelatedVideosDetails :id="getIdParam" />
         </v-tab-item>
         <v-tab-item>
-          <CastDetails :movie="movie" />
+          <CastDetails :id="getIdParam" />
         </v-tab-item>
         <v-tab-item>
-          <SimilarDetails :movie="movie"/>
+          <SimilarDetails :id="getIdParam" />
         </v-tab-item>
       </v-tabs>
     </v-card>
+    <v-container v-else class="d-flex justify-center">
+      <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+    </v-container>
   </v-container>
 </template>
 
 <script>
 import { HTTP } from "../../plugins/axios";
-import { mapActions } from "vuex";
 import AboutDetails from "../../components/movieDetails/AboutDetails";
 import RelatedVideosDetails from "../../components/movieDetails/RelatedVideosDetails";
 import CastDetails from "../../components/movieDetails/CastDetails";
 import SimilarDetails from "../../components/movieDetails/SimilarDetails";
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 
 export default {
   name: "MovieDetails",
@@ -47,24 +51,42 @@ export default {
     CastDetails,
     SimilarDetails
   },
+  mounted() {
+    this.getConfiguration();
+  },
   data() {
     return {
+      CurrentTab: 0,
       movie: {},
+      isLoading: true
     };
   },
-  created() {
-      this.getMovie();
+  computed: {
+    ...mapGetters({
+      configuration: "configuration/configuration"
+    }),
+    getIdParam: function() {
+      return this.$route.params.id;
+    }
   },
   methods: {
-    ...mapActions({
-      setTitle: "navBar/setTitle",
+    ...mapMutations({
+      updateConfiguration: "configuration/getConfiguration"
     }),
-    getMovie() {
-      HTTP.get(`movie/${this.$route.params.id}`).then(res => {
-        this.movie = res.data;
-        this.setTitle(res.data.title);
+    getConfiguration() {
+      this.isLoading = true;
+      HTTP.get("configuration").then(res => {
+        this.updateConfiguration(res.data);
+        this.isLoading = false;
       });
-    },
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name === from.name) {
+        this.CurrentTab = 0;
+      }
+    }
   }
 };
 </script>
