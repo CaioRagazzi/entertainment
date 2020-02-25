@@ -14,19 +14,19 @@ const getters = {
     },
     getImagePosterURL: state => {
         return (
-            state.configuration.images.base_url +
+            state.configuration.images.secure_base_url +
             state.configuration.images.poster_sizes[4]
         );
     },
     getImageBackdropURL: state => {
         return (
-            state.configuration.images.base_url +
+            state.configuration.images.secure_base_url +
             state.configuration.images.backdrop_sizes[2]
         );
     },
     getImageProfileURL: state => {
         return (
-            state.configuration.images.base_url +
+            state.configuration.images.secure_base_url +
             state.configuration.images.profile_sizes[3]
         );
     }

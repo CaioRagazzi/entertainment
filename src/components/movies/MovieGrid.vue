@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// import { HTTP } from "../../plugins/axios";
 import MovieCard from "./MovieCard";
 
 export default {
