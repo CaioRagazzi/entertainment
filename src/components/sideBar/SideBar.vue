@@ -2,31 +2,40 @@
   <div>
     <v-navigation-drawer color="primary" fixed temporary v-model="isOpen" touchless dark>
       <v-list dense nav class="py-0">
-        <v-list-item link>
+        <v-list-item @click="goTo('/')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title @click="goTo('/')">Upcomming Movies</v-list-item-title>
+            <v-list-item-title>Upcomming Movies</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item @click="goTo('/NowPlaying')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title @click="goTo('/NowPlaying')">Now Playing</v-list-item-title>
+            <v-list-item-title>Now Playing</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item @click="goTo('/Popular')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title @click="goTo('/popular')">Popular</v-list-item-title>
+            <v-list-item-title>Popular</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="goTo('/TopRated')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Top Rated</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

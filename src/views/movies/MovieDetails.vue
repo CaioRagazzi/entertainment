@@ -1,10 +1,24 @@
 <template>
   <div>
-    <div class="d-flex justify-center">
-      <v-card :loading="getImageURL === null">
-        <div v-if="getImageURL === null"></div>
-        <v-img v-else :src="getImageURL"></v-img>
-      </v-card>
+    <div>
+      <v-carousel
+        :interval="3000"
+        vertical
+        hide-delimiter-background
+        hide-delimiters
+        dark
+        height="50vh"
+      >
+        <v-carousel-item
+          class="carousel"
+          v-for="image in images"
+          :key="image.id"
+          :src="getImageURL(image.file_path)"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+          contain
+        ></v-carousel-item>
+      </v-carousel>
     </div>
     <v-container class="d-flex flex-wrap justify-center">
       <v-chip
@@ -13,45 +27,57 @@
         :key="genre.id"
         color="primary"
       >{{ genre.name }}</v-chip>
-      <!-- <v-chip
-        class="ml-1 mt-1"
-        v-for="keyword in keyWords"
-        :key="keyword.id"
-        color="primary"
-      >{{ keyword.name }}</v-chip> -->
     </v-container>
-    <p class="text-sm">
-      <b>Overview:</b>
-      {{ movie.overview }}
-    </p>
-    <p>
-      <b>Budget:</b>
-      ${{ movie.budget }}
-    </p>
-    <p v-if="movie.homepage">
-      <b>Home Page:</b>
-      <a target="_blank" :href="movie.homepage">{{ movie.homepage }}</a>
-    </p>
-    <p>
-      <b>Adult:</b>
-      {{ movie.adult ? "Yes" : "No" }}
-    </p>
-    <p>
-      <b>Original Language:</b>
-      {{ movie.original_language }}
-    </p>
-    <p>
-      <b>Original Title:</b>
-      {{ movie.original_title }}
-    </p>
-    <p>
-      <b>Release Date:</b>
-      {{ movie.release_date }}
-    </p>
-    <p v-if="movie.tagline">
-      <b>Tagline:</b>
-      {{ movie.tagline }}
-    </p>
+    <v-divider class="pt-5"></v-divider>
+    <div>
+      <p class="text-sm">
+        <b>Overview:</b>
+        {{ movie.overview }}
+      </p>
+      <p>
+        <b>Budget:</b>
+        ${{ movie.budget }}
+      </p>
+      <p v-if="movie.homepage">
+        <b>Home Page:</b>
+        <a target="_blank" :href="movie.homepage">{{ movie.homepage }}</a>
+      </p>
+      <p>
+        <b>Adult:</b>
+        {{ movie.adult ? "Yes" : "No" }}
+      </p>
+      <p>
+        <b>Original Language:</b>
+        {{ movie.original_language }}
+      </p>
+      <p>
+        <b>Original Title:</b>
+        {{ movie.original_title }}
+      </p>
+      <p>
+        <b>Release Date:</b>
+        {{ movie.release_date }}
+      </p>
+      <p v-if="movie.tagline">
+        <b>Tagline:</b>
+        {{ movie.tagline }}
+      </p>
+    </div>
+    <v-divider></v-divider>
+    <h2>Related Videos</h2>
+    <div class="d-flex flex-wrap justify-center pt-2">
+      <iframe
+        class="pl-2 pt-2"
+        v-for="movie in movies"
+        :key="movie.id"
+        frameborder="0"
+        width="600vw"
+        height="300vh"
+        :src="`https://www.youtube.com/embed/${movie.key}`"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
 </template>
 
@@ -69,6 +95,8 @@ export default {
       backDropSizes: [],
       isLoading: true,
       keyWords: [],
+      movies: [],
+      images: [],
       window: {
         width: 0
       }
@@ -78,11 +106,16 @@ export default {
     if (this.configuration.images === undefined) {
       this.getConfiguration().then(() => {
         this.getMovie();
+        this.getKeyWords();
+        this.getVideos();
+        this.getImages();
       });
     } else {
       this.getMovie();
+      this.getKeyWords();
+      this.getVideos();
+      this.getImages();
     }
-    this.getKeyWords();
   },
   computed: {
     ...mapGetters({
@@ -90,28 +123,23 @@ export default {
       configuration: "configuration/configuration",
       isConfigLoading: "configuration/isLoading"
     }),
-    getScreenSize: function () {
+    getScreenSize: function() {
       return window.innerWidth;
-    },
-    getImageURL: function() {
-      if (
-        (this.movie.backdrop_path === null ||
-          this.movie.backdrop_path === undefined) &&
-        (this.movie.poster_path === null ||
-          this.movie.poster_path === undefined)
-      ) {
-        return null;
-      } else if (
-        this.movie.backdrop_path === null ||
-        this.movie.backdrop_path === undefined
-      ) {
-        return this.getBaseUrlPlusSize + this.movie.poster_path;
-      } else {
-        return this.getBaseUrlPlusSize + this.movie.backdrop_path;
-      }
     }
   },
   methods: {
+    getImages() {
+      HTTP.get(`movie/${this.$route.params.id}/images`).then(res => {
+        console.log(res.data.backdrops);
+
+        this.images = res.data.backdrops;
+      });
+    },
+    getVideos() {
+      HTTP.get(`movie/${this.$route.params.id}/videos`).then(res => {
+        this.movies = res.data.results;
+      });
+    },
     ...mapActions({
       setTitle: "navBar/setTitle",
       getConfiguration: "configuration/getConfiguration"
@@ -124,15 +152,22 @@ export default {
     getMovie() {
       this.isLoading = true;
       HTTP.get(`movie/${this.$route.params.id}`).then(res => {
-        console.log(res.data);
         this.movie = res.data;
         this.setTitle(res.data.title);
         this.isLoading = false;
       });
+    },
+    getImageURL: function(filePath) {
+      console.log(filePath);
+
+      return this.getBaseUrlPlusSize + filePath;
     }
   }
 };
 </script>
 
 <style scoped>
+.carousel {
+  background: rgba(235,247,255,1);
+}
 </style>
