@@ -2,8 +2,6 @@
   <div>
     <MovieGrid
       :movies="movies"
-      :currentPage="currentPage"
-      :totalPages="totalPages"
       :loading="loading"
     />
     <div>

@@ -12,7 +12,7 @@
           <v-icon left>mdi-account-multiple</v-icon>Cast
         </v-tab>
         <v-tab>
-          <v-icon left>mdi-domain</v-icon>Crew
+          <v-icon left>mdi-domain</v-icon>Similar Movies
         </v-tab>
         <v-tab-item>
           <AboutDetails :movie="movie" />
@@ -22,6 +22,9 @@
         </v-tab-item>
         <v-tab-item>
           <CastDetails :movie="movie" />
+        </v-tab-item>
+        <v-tab-item>
+          <SimilarDetails :movie="movie"/>
         </v-tab-item>
       </v-tabs>
     </v-card>
@@ -34,13 +37,15 @@ import { mapActions } from "vuex";
 import AboutDetails from "../../components/movieDetails/AboutDetails";
 import RelatedVideosDetails from "../../components/movieDetails/RelatedVideosDetails";
 import CastDetails from "../../components/movieDetails/CastDetails";
+import SimilarDetails from "../../components/movieDetails/SimilarDetails";
 
 export default {
   name: "MovieDetails",
   components: {
     AboutDetails,
     RelatedVideosDetails,
-    CastDetails
+    CastDetails,
+    SimilarDetails
   },
   data() {
     return {

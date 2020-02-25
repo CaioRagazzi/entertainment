@@ -49,7 +49,6 @@ export default {
         this.casts = res.data.cast.filter(item => {
           return item.profile_path !== null;
         });
-        console.log(this.casts);
       });
     }
   }

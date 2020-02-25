@@ -18,7 +18,7 @@ import MovieCard from "./MovieCard";
 
 export default {
   name: "Upcoming",
-  props: ["movies", "currentPage", "totalPages", "loading"],
+  props: ["movies", "loading"],
   components: {
     MovieCard
   },
