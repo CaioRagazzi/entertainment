@@ -23,6 +23,12 @@ const getters = {
             state.configuration.images.base_url +
             state.configuration.images.backdrop_sizes[2]
         );
+    },
+    getImageProfileURL: state => {
+        return (
+            state.configuration.images.base_url +
+            state.configuration.images.profile_sizes[3]
+        );
     }
 }
 

@@ -1,0 +1,60 @@
+<template>
+  <v-container class="d-flex flex-wrap justify-space-between">
+    <div class="d-flex" v-for="cast in casts" :key="cast.id">
+      <div>
+        <v-img class="mb-2 ml-3" :src="getImageProfileURL + cast.profile_path" width="8rem"></v-img>
+      </div>
+      <v-container style="width: 20rem">
+        <v-list-item class="pl-3" two-line>
+          <v-list-item-content>
+            <v-list-item-title>Character</v-list-item-title>
+            <v-list-item-subtitle>{{ cast.character }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item class="pl-3" two-line>
+          <v-list-item-content>
+            <v-list-item-title>Name</v-list-item-title>
+            <v-list-item-subtitle>{{ cast.name }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-container>
+    </div>
+  </v-container>
+</template>
+
+<script>
+import { HTTP } from "../../plugins/axios";
+import { mapGetters } from "vuex";
+
+export default {
+  name: "CastDetails",
+  props: ["movie"],
+  data() {
+    return {
+      casts: []
+    };
+  },
+  beforeMount() {
+    this.getCast();
+  },
+  computed: {
+    ...mapGetters({
+      getImageProfileURL: "configuration/getImageProfileURL"
+    })
+  },
+  methods: {
+    async getCast() {
+      await HTTP.get(`movie/${this.movie.id}/credits`).then(res => {
+        this.casts = res.data.cast.filter(item => {
+          return item.profile_path !== null;
+        });
+        console.log(this.casts);
+      });
+    }
+  }
+};
+</script>
+
+<style>
+</style>

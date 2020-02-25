@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'UpCommingMovies',
-    component: UpCommingMovies
+    component: UpCommingMovies,
   },
   {
     path: '/NowPlaying',

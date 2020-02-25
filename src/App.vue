@@ -3,7 +3,7 @@
     <NavBar />
     <SideBar />
     <v-content class="grey lighten-3">
-      <v-container fluid>
+      <v-container>
         <router-view></router-view>
       </v-container>
     </v-content>
