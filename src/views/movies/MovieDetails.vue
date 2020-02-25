@@ -51,7 +51,7 @@ export default {
     CastDetails,
     SimilarDetails
   },
-  mounted() {
+  created() {
     this.getConfiguration();
   },
   data() {
