@@ -1,83 +1,126 @@
 <template>
-  <div>
-    <div>
-      <v-carousel
-        :interval="3000"
-        vertical
-        hide-delimiter-background
-        hide-delimiters
-        dark
-        height="50vh"
-      >
-        <v-carousel-item
-          v-for="image in images"
-          :key="image.id"
-          :src="getImageURL(image.file_path)"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-          contain
-        ></v-carousel-item>
-      </v-carousel>
-    </div>
-    <v-container class="d-flex flex-wrap justify-center">
-      <v-chip
-        class="ml-1 mt-1"
-        v-for="genre in movie.genres"
-        :key="genre.id"
-        color="primary"
-      >{{ genre.name }}</v-chip>
-    </v-container>
-    <v-divider class="pt-5"></v-divider>
-    <div>
-      <p class="text-sm">
-        <b>Overview:</b>
-        {{ movie.overview }}
-      </p>
-      <p>
-        <b>Budget:</b>
-        ${{ movie.budget }}
-      </p>
-      <p v-if="movie.homepage">
-        <b>Home Page:</b>
-        <a target="_blank" :href="movie.homepage">{{ movie.homepage }}</a>
-      </p>
-      <p>
-        <b>Adult:</b>
-        {{ movie.adult ? "Yes" : "No" }}
-      </p>
-      <p>
-        <b>Original Language:</b>
-        {{ movie.original_language }}
-      </p>
-      <p>
-        <b>Original Title:</b>
-        {{ movie.original_title }}
-      </p>
-      <p>
-        <b>Release Date:</b>
-        {{ movie.release_date }}
-      </p>
-      <p v-if="movie.tagline">
-        <b>Tagline:</b>
-        {{ movie.tagline }}
-      </p>
-    </div>
-    <v-divider></v-divider>
-    <h2>Related Videos</h2>
-    <div class="d-flex flex-wrap justify-center pt-2">
-      <iframe
-        class="pl-2 pt-2"
-        v-for="movie in movies"
-        :key="movie.id"
-        frameborder="0"
-        width="600vw"
-        height="300vh"
-        :src="`https://www.youtube.com/embed/${movie.key}`"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </div>
+  <v-container>
+    <v-card>
+      <div>
+        <v-carousel
+          :interval="3000"
+          vertical
+          hide-delimiter-background
+          hide-delimiters
+          dark
+          height="50vh"
+        >
+          <v-carousel-item
+            v-for="image in images"
+            :key="image.id"
+            :src="getImageURL(image.file_path)"
+            reverse-transition="fade-transition"
+            transition="fade-transition"
+            contain
+          ></v-carousel-item>
+        </v-carousel>
+      </div>
+      <v-container class="d-flex flex-wrap justify-center">
+        <v-chip
+          class="ml-1 mt-1"
+          v-for="genre in movie.genres"
+          :key="genre.id"
+          color="primary"
+        >{{ genre.name }}</v-chip>
+      </v-container>
+      <v-container>
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title>Overview:</v-list-item-title>
+            <v-list-item-subtitle>{{ movie.overview }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-container>
+      <v-container>
+        <v-row no-gutters>
+          <v-col cols="12" sm="4">
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Budget:</v-list-item-title>
+                <v-list-item-subtitle>{{ movie.budget }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-list-item v-if="movie.homepage" two-line>
+              <v-list-item-content>
+                <v-list-item-title>Home Page:</v-list-item-title>
+                <v-list-item-subtitle>
+                  <a target="_blank" :href="movie.homepage">{{ movie.homepage }}</a>
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Adult:</v-list-item-title>
+                <v-list-item-subtitle>{{ movie.adult ? "Yes" : "No" }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col cols="12" sm="4">
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Original Language:</v-list-item-title>
+                <v-list-item-subtitle>{{ movie.original_language }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Original Title:</v-list-item-title>
+                <v-list-item-subtitle>{{ movie.original_title }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Release Date:</v-list-item-title>
+                <v-list-item-subtitle>{{ movie.release_date }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col cols="12" sm="4">
+            <v-list-item v-if="movie.tagline" two-line>
+              <v-list-item-content>
+                <v-list-item-title>Tagline:</v-list-item-title>
+                <v-list-item-subtitle>{{ movie.tagline }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container>
+        <h2>Related Videos</h2>
+      </v-container>
+      <v-container class="d-flex flex-wrap justify-center pt-2">
+        <iframe
+          class="pl-2 pt-2"
+          v-for="movie in movies"
+          :key="movie.id"
+          frameborder="0"
+          width="600vw"
+          height="300vh"
+          :src="`https://www.youtube.com/embed/${movie.key}`"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </v-container>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
