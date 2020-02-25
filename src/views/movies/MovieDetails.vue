@@ -10,7 +10,6 @@
         height="50vh"
       >
         <v-carousel-item
-          class="carousel"
           v-for="image in images"
           :key="image.id"
           :src="getImageURL(image.file_path)"
@@ -130,8 +129,6 @@ export default {
   methods: {
     getImages() {
       HTTP.get(`movie/${this.$route.params.id}/images`).then(res => {
-        console.log(res.data.backdrops);
-
         this.images = res.data.backdrops;
       });
     },
@@ -158,8 +155,6 @@ export default {
       });
     },
     getImageURL: function(filePath) {
-      console.log(filePath);
-
       return this.getBaseUrlPlusSize + filePath;
     }
   }
@@ -167,7 +162,4 @@ export default {
 </script>
 
 <style scoped>
-.carousel {
-  background: rgba(235,247,255,1);
-}
 </style>

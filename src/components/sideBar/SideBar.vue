@@ -2,42 +2,55 @@
   <div>
     <v-navigation-drawer color="primary" fixed temporary v-model="isOpen" touchless dark>
       <v-list dense nav class="py-0">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">Movies</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
         <v-list-item @click="goTo('/')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Upcomming Movies</v-list-item-title>
+            <v-list-item-title>Upcomming</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <v-list-item @click="goTo('/NowPlaying')" link>
           <v-list-item-icon>
-            <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
+            <v-icon>{{ 'mdi-newspaper' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>Now Playing</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <v-list-item @click="goTo('/Popular')" link>
           <v-list-item-icon>
-            <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
+            <v-icon>{{ 'mdi-account-box' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>Popular</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
         <v-list-item @click="goTo('/TopRated')" link>
           <v-list-item-icon>
-            <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
+            <v-icon>{{ 'mdi-chevron-triple-up' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>Top Rated</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-divider></v-divider>
       </v-list>
     </v-navigation-drawer>
     <v-snackbar v-model="isAlert" top right color="warning">

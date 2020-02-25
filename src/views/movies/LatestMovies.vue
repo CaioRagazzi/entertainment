@@ -61,8 +61,6 @@ export default {
       HTTP.get("movie/now_playing", {
         params: { page: this.currentPage }
       }).then(res => {
-        console.log(res);
-
         this.movies = res.data.results;
         this.totalPages = res.data.total_pages;
         this.loading = false;
