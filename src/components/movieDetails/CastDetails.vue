@@ -5,19 +5,21 @@
         <v-img class="mb-2 ml-3 my-img" :src="getImageProfileURL + cast.profile_path" width="8rem"></v-img>
       </div>
       <v-container class="pl-3" style="width: 12rem">
-        <v-list-item two-line>
-          <v-list-item-content>
-            <v-list-item-title>Character</v-list-item-title>
-            <v-list-item-subtitle>{{ cast.character }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <v-list>
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title>Character</v-list-item-title>
+              <v-list-item-subtitle>{{ cast.character }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item two-line>
-          <v-list-item-content>
-            <v-list-item-title>Name</v-list-item-title>
-            <v-list-item-subtitle>{{ cast.name }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item two-line>
+            <v-list-item-content>
+              <v-list-item-title>Name</v-list-item-title>
+              <v-list-item-subtitle>{{ cast.name }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
       </v-container>
     </div>
   </v-container>
@@ -54,8 +56,8 @@ export default {
         this.isCastLoading = false;
       });
     },
-    cleanFields(){
-      this.casts = []
+    cleanFields() {
+      this.casts = [];
     }
   },
   watch: {

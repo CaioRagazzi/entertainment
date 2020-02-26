@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar app color="primary" dark v-model="show">
+  <v-app-bar class app color="primary" dark v-model="show">
     <v-app-bar-nav-icon @click="toggleSideBar"></v-app-bar-nav-icon>
-    <v-toolbar-title> {{ title }} </v-toolbar-title>
+    <v-toolbar-title>{{ title }}</v-toolbar-title>
   </v-app-bar>
 </template>
 
@@ -12,10 +12,16 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      show: true
+      show: true,
+      items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify',
+        ],
     };
   },
-  computed:{
+  computed: {
     ...mapGetters({
       title: "navBar/title"
     })
@@ -23,7 +29,7 @@ export default {
   methods: {
     ...mapActions({
       toggleSideBar: "sideBar/toggleSideBar"
-    }),
+    })
   }
 };
 </script>

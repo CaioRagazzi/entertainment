@@ -1,37 +1,39 @@
 <template>
-  <v-container class="container-details">
-    <v-card v-if="!isLoading">
-      <v-tabs v-model="CurrentTab">
-        <v-tab>
-          <v-icon left>mdi-filmstrip</v-icon>About
-        </v-tab>
-        <v-tab>
-          <v-icon left>mdi-library-video</v-icon>Related Videos
-        </v-tab>
-        <v-tab>
-          <v-icon left>mdi-account-multiple</v-icon>Cast
-        </v-tab>
-        <v-tab>
-          <v-icon left>mdi-domain</v-icon>Similar Movies
-        </v-tab>
-        <v-tab-item>
-          <AboutDetails :id="getIdParam" />
-        </v-tab-item>
-        <v-tab-item>
-          <RelatedVideosDetails :id="getIdParam" />
-        </v-tab-item>
-        <v-tab-item>
-          <CastDetails :id="getIdParam" />
-        </v-tab-item>
-        <v-tab-item>
-          <SimilarDetails :id="getIdParam" />
-        </v-tab-item>
-      </v-tabs>
-    </v-card>
-    <v-container v-else class="d-flex justify-center">
-      <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+  <div class="d-flex">
+    <v-container class="container-details">
+      <v-card class="mx-auto" v-if="!isLoading">
+        <v-tabs v-model="CurrentTab">
+          <v-tab>
+            <v-icon left>mdi-filmstrip</v-icon>About
+          </v-tab>
+          <v-tab>
+            <v-icon left>mdi-library-video</v-icon>Related Videos
+          </v-tab>
+          <v-tab>
+            <v-icon left>mdi-account-multiple</v-icon>Cast
+          </v-tab>
+          <v-tab>
+            <v-icon left>mdi-domain</v-icon>Similar Movies
+          </v-tab>
+          <v-tab-item>
+            <AboutDetails :id="getIdParam" />
+          </v-tab-item>
+          <v-tab-item>
+            <RelatedVideosDetails :id="getIdParam" />
+          </v-tab-item>
+          <v-tab-item>
+            <CastDetails :id="getIdParam" />
+          </v-tab-item>
+          <v-tab-item>
+            <SimilarDetails :id="getIdParam" />
+          </v-tab-item>
+        </v-tabs>
+      </v-card>
+      <v-container v-else class="d-flex justify-center">
+        <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+      </v-container>
     </v-container>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -83,6 +85,8 @@ export default {
   },
   watch: {
     $route(to, from) {
+      console.log(to, from);
+      
       if (to.name === from.name) {
         this.CurrentTab = 0;
       }
