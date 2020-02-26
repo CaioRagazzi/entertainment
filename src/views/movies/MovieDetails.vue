@@ -1,39 +1,40 @@
 <template>
-  <div class="d-flex">
-    <v-container class="container-details">
-      <v-card class="mx-auto" v-if="!isLoading">
-        <v-tabs v-model="CurrentTab">
-          <v-tab>
-            <v-icon left>mdi-filmstrip</v-icon>About
-          </v-tab>
-          <v-tab>
-            <v-icon left>mdi-library-video</v-icon>Related Videos
-          </v-tab>
-          <v-tab>
-            <v-icon left>mdi-account-multiple</v-icon>Cast
-          </v-tab>
-          <v-tab>
-            <v-icon left>mdi-domain</v-icon>Similar Movies
-          </v-tab>
-          <v-tab-item>
-            <AboutDetails :id="getIdParam" />
-          </v-tab-item>
-          <v-tab-item>
-            <RelatedVideosDetails :id="getIdParam" />
-          </v-tab-item>
-          <v-tab-item>
-            <CastDetails :id="getIdParam" />
-          </v-tab-item>
-          <v-tab-item>
-            <SimilarDetails :id="getIdParam" />
-          </v-tab-item>
-        </v-tabs>
-      </v-card>
-      <v-container v-else class="d-flex justify-center">
-        <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
-      </v-container>
+  <v-container class="container-details">
+    <v-btn @click="goBack()" class="mb-2" color="prymary">
+      <v-icon left>mdi-arrow-left</v-icon>Back
+    </v-btn>
+    <v-card class="mx-auto" v-if="!isLoading">
+      <v-tabs v-model="CurrentTab">
+        <v-tab>
+          <v-icon left>mdi-filmstrip</v-icon>About
+        </v-tab>
+        <v-tab>
+          <v-icon left>mdi-library-video</v-icon>Related Videos
+        </v-tab>
+        <v-tab>
+          <v-icon left>mdi-account-multiple</v-icon>Cast
+        </v-tab>
+        <v-tab>
+          <v-icon left>mdi-domain</v-icon>Similar Movies
+        </v-tab>
+        <v-tab-item>
+          <AboutDetails :id="getIdParam" />
+        </v-tab-item>
+        <v-tab-item>
+          <RelatedVideosDetails :id="getIdParam" />
+        </v-tab-item>
+        <v-tab-item>
+          <CastDetails :id="getIdParam" />
+        </v-tab-item>
+        <v-tab-item>
+          <SimilarDetails :id="getIdParam" />
+        </v-tab-item>
+      </v-tabs>
+    </v-card>
+    <v-container v-else class="d-flex justify-center">
+      <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
     </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -72,6 +73,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     ...mapMutations({
       updateConfiguration: "configuration/getConfiguration"
     }),
@@ -86,7 +90,7 @@ export default {
   watch: {
     $route(to, from) {
       console.log(to, from);
-      
+
       if (to.name === from.name) {
         this.CurrentTab = 0;
       }
