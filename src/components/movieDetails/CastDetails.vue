@@ -2,7 +2,7 @@
   <v-container class="d-flex flex-wrap">
     <div class="d-flex align-center" v-for="cast in casts" :key="cast.cast_id">
       <div>
-        <v-img class="mb-2 ml-3 my-img" :src="getImageProfileURL + cast.profile_path" width="8rem"></v-img>
+        <v-img class="mb-2 ml-3 my-img" :src="getImageProfileURL(cast.profile_path)" width="8rem"></v-img>
       </div>
       <v-container class="pl-3" style="width: 12rem">
         <v-list>
@@ -27,7 +27,6 @@
 
 <script>
 import { HTTP } from "../../plugins/axios";
-import { mapGetters } from "vuex";
 
 export default {
   name: "CastDetails",
@@ -35,18 +34,28 @@ export default {
   data() {
     return {
       casts: [],
-      isCastLoading: true
+      isCastLoading: true,
+      configuration: {}
     };
   },
-  created() {
+  async created() {
+    if (localStorage.config === undefined) {
+      await HTTP.get("configuration").then(res => {
+        localStorage.setItem("config", JSON.stringify(res.data));
+        this.configuration = JSON.parse(localStorage.config);
+      });
+    } else {
+      this.configuration = JSON.parse(localStorage.config);
+    }
     this.getCast();
   },
-  computed: {
-    ...mapGetters({
-      getImageProfileURL: "configuration/getImageProfileURL"
-    })
-  },
   methods: {
+    getImageProfileURL(image) {
+      return (
+        this.configuration.images.secure_base_url +
+        this.configuration.images.profile_sizes[3] + image
+      );
+    },
     getCast() {
       this.isCastLoading = true;
       HTTP.get(`movie/${this.id}/credits`).then(res => {

@@ -1,9 +1,6 @@
 <template>
   <div>
-    <MovieGrid
-      :movies="movies"
-      :loading="loading"
-    />
+    <MovieGrid :movies="movies" :loading="loading" />
     <div>
       <v-pagination
         :length="totalPages"
@@ -19,7 +16,6 @@
 import { HTTP } from "../../plugins/axios";
 import MovieGrid from "../../components/movies/MovieGrid";
 import { mapActions } from "vuex";
-import { mapGetters } from "vuex";
 
 export default {
   name: "NowPlaying",
@@ -35,24 +31,12 @@ export default {
     };
   },
   created() {
-    if (this.configuration.images === undefined) {
-      this.getConfiguration().then(() => {
-        this.getMovies();
-      });
-    } else {
       this.getMovies();
-    }
     this.setTitle("Now Playing");
-  },
-  computed: {
-    ...mapGetters({
-      configuration: "configuration/configuration"
-    })
   },
   methods: {
     ...mapActions({
       setTitle: "navBar/setTitle",
-      getConfiguration: "configuration/getConfiguration"
     }),
     getMovies() {
       this.loading = true;

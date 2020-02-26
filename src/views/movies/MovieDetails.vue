@@ -3,7 +3,7 @@
     <v-btn @click="goBack()" class="mb-2" color="white">
       <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
-    <v-card class="mx-auto" v-if="!isLoading">
+    <v-card class="mx-auto">
       <v-tabs v-model="CurrentTab">
         <v-tab>
           <v-icon left>mdi-filmstrip</v-icon>About
@@ -31,20 +31,14 @@
         </v-tab-item>
       </v-tabs>
     </v-card>
-    <v-container v-else class="d-flex justify-center">
-      <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
-    </v-container>
   </v-container>
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
 import AboutDetails from "../../components/movieDetails/AboutDetails";
 import RelatedVideosDetails from "../../components/movieDetails/RelatedVideosDetails";
 import CastDetails from "../../components/movieDetails/CastDetails";
 import SimilarDetails from "../../components/movieDetails/SimilarDetails";
-import { mapGetters } from "vuex";
-import { mapMutations } from "vuex";
 
 export default {
   name: "MovieDetails",
@@ -54,20 +48,13 @@ export default {
     CastDetails,
     SimilarDetails
   },
-  created() {
-    this.getConfiguration();
-  },
   data() {
     return {
       CurrentTab: 0,
       movie: {},
-      isLoading: true
     };
   },
   computed: {
-    ...mapGetters({
-      configuration: "configuration/configuration"
-    }),
     getIdParam: function() {
       return this.$route.params.id;
     }
@@ -76,16 +63,6 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    ...mapMutations({
-      updateConfiguration: "configuration/getConfiguration"
-    }),
-    getConfiguration() {
-      this.isLoading = true;
-      HTTP.get("configuration").then(res => {
-        this.updateConfiguration(res.data);
-        this.isLoading = false;
-      });
-    }
   },
   watch: {
     $route(to, from) {

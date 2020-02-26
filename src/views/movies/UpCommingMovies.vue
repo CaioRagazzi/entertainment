@@ -1,9 +1,6 @@
 <template>
   <div>
-    <MovieGrid
-      :movies="movies"
-      :loading="loading"
-    />
+    <MovieGrid :movies="movies" :loading="loading" />
     <div>
       <v-pagination
         :length="totalPages"

@@ -14,7 +14,7 @@
         <v-carousel-item
           v-for="image in images"
           :key="image.id"
-          :src="getBaseUrlPlusSize + image.file_path"
+          :src="getImageURL(image.file_path)"
           reverse-transition="fade-transition"
           transition="fade-transition"
           contain
@@ -114,7 +114,6 @@
 
 <script>
 import { HTTP } from "../../plugins/axios";
-import { mapGetters } from "vuex";
 import { mapActions } from "vuex";
 
 export default {
@@ -125,19 +124,30 @@ export default {
       images: [],
       movie: [],
       isImageLoading: true,
-      isMovieLoading: true
+      isMovieLoading: true,
+      configuration: {}
     };
   },
-  created() {
+  async created() {
+    if (localStorage.config === undefined) {
+      await HTTP.get("configuration").then(res => {
+        localStorage.setItem("config", JSON.stringify(res.data));
+        this.configuration = JSON.parse(localStorage.config);
+      });
+    } else {
+      this.configuration = JSON.parse(localStorage.config);
+    }
     this.getImages();
     this.getMovie();
   },
-  computed: {
-    ...mapGetters({
-      getBaseUrlPlusSize: "configuration/getImageBackdropURL"
-    })
-  },
   methods: {
+    getImageURL(image) {
+      return (
+        this.configuration.images.secure_base_url +
+        this.configuration.images.poster_sizes[4] +
+        image
+      );
+    },
     ...mapActions({
       setTitle: "navBar/setTitle"
     }),
@@ -156,9 +166,9 @@ export default {
         this.isMovieLoading = false;
       });
     },
-    cleanFields(){
+    cleanFields() {
       this.images = [];
-      this.movie = []
+      this.movie = [];
     }
   },
   watch: {

@@ -13,12 +13,6 @@ export default {
   data() {
     return {
       show: true,
-      items: [
-          'Programming',
-          'Design',
-          'Vue',
-          'Vuetify',
-        ],
     };
   },
   computed: {

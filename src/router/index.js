@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/NowPlaying',
     name: 'NowPlaying',
-    component: LatestMovies
+    component: LatestMovies,
   },
   {
     path: '/Popular',
