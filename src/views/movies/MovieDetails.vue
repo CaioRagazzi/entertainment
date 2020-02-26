@@ -1,6 +1,6 @@
 <template>
   <v-container class="container-details">
-    <v-btn @click="goBack()" class="mb-2" color="prymary">
+    <v-btn @click="goBack()" class="mb-2" color="white">
       <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
     <v-card class="mx-auto" v-if="!isLoading">
