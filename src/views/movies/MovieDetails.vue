@@ -89,8 +89,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to, from);
-
       if (to.name === from.name) {
         this.CurrentTab = 0;
       }
