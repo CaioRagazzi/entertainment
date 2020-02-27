@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import AboutDetails from "../../components/movieDetails/AboutDetails";
+import AboutDetails from "../../components/movieDetails/aboutDetails/AboutDetails";
 import RelatedVideosDetails from "../../components/movieDetails/RelatedVideosDetails";
 import CastDetails from "../../components/movieDetails/CastDetails";
 import SimilarDetails from "../../components/movieDetails/SimilarDetails";

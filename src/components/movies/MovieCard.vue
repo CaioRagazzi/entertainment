@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-container>
     <v-card :loading="loading || image == null" @click="goToDetails" hover class="mb-5 mr-5 card">
-      <div v-if="image === null || image === undefined"></div>
+      <v-skeleton-loader v-if="image === null || image === undefined" height="100%" width="100%" type="card"></v-skeleton-loader>
       <v-img v-else height="100%" width="100%" :src="getImagePosterURL(image)" contain></v-img>
     </v-card>
   </div>
