@@ -12,14 +12,24 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Character</v-list-item-title>
-              <v-list-item-subtitle>{{ cast.character }}</v-list-item-subtitle>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-list-item-subtitle v-on="on">{{ cast.character }}</v-list-item-subtitle>
+                </template>
+                <span>{{ cast.character }}</span>
+              </v-tooltip>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title>Name</v-list-item-title>
-              <v-list-item-subtitle>{{ cast.name }}</v-list-item-subtitle>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-list-item-subtitle v-on="on">{{ cast.name }}</v-list-item-subtitle>
+                </template>
+                <span>{{ cast.character }}</span>
+              </v-tooltip>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -39,7 +49,7 @@ export default {
   data() {
     return {
       casts: [],
-      isCastLoading: true,
+      isCastLoading: true
     };
   },
   created() {
