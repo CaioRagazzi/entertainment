@@ -1,7 +1,9 @@
 <template>
   <v-container>
-    <v-progress-circular v-if="isSimilarLoading" :size="50" color="primary" indeterminate></v-progress-circular>
-    <v-container>
+    <v-container class="d-flex justify-center align-center" v-if="isSimilarLoading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-container>
+    <v-container v-else>
       <MovieGrid :movies="similarMovies" />
       <div>
         <v-pagination

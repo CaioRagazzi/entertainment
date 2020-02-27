@@ -1,13 +1,18 @@
 <template>
   <div>
-    <MovieGrid :movies="movies" :loading="loading" />
+    <div v-if="loading" class="d-flex justify-center align-center">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </div>
     <div>
-      <v-pagination
-        :length="totalPages"
-        v-model="currentPage"
-        :total-visible="8"
-        @input="changePage"
-      ></v-pagination>
+      <MovieGrid :movies="movies" :loading="loading" />
+      <div>
+        <v-pagination
+          :length="totalPages"
+          v-model="currentPage"
+          :total-visible="8"
+          @input="changePage"
+        ></v-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -31,12 +36,12 @@ export default {
     };
   },
   created() {
-      this.getMovies();
+    this.getMovies();
     this.setTitle("Now Playing");
   },
   methods: {
     ...mapActions({
-      setTitle: "navBar/setTitle",
+      setTitle: "navBar/setTitle"
     }),
     getMovies() {
       this.loading = true;

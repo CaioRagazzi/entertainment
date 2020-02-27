@@ -1,6 +1,9 @@
 <template>
   <v-container class="d-flex flex-wrap">
-    <div class="d-flex align-center" v-for="cast in casts" :key="cast.cast_id">
+    <v-container class="d-flex justify-center align-center" v-if="loadingConfig">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-container>
+    <div v-else class="d-flex align-center" v-for="cast in casts" :key="cast.cast_id">
       <div>
         <v-img class="mb-2 ml-3 my-img" :src="getImageProfileURL(cast.profile_path)" width="8rem"></v-img>
       </div>
@@ -35,25 +38,35 @@ export default {
     return {
       casts: [],
       isCastLoading: true,
+      loadingConfig: true,
       configuration: {}
     };
   },
   async created() {
-    if (localStorage.config === undefined) {
-      await HTTP.get("configuration").then(res => {
-        localStorage.setItem("config", JSON.stringify(res.data));
-        this.configuration = JSON.parse(localStorage.config);
-      });
-    } else {
-      this.configuration = JSON.parse(localStorage.config);
-    }
+    this.setConfiguration();
     this.getCast();
   },
   methods: {
+    setConfiguration() {
+      if (this.hasStorageConfiguration()) {
+        this.configuration = JSON.parse(localStorage.config);
+        this.loadingConfig = false;
+      } else {
+        HTTP.get("configuration").then(res => {
+          localStorage.setItem("config", JSON.stringify(res.data));
+          this.configuration = JSON.parse(localStorage.config);
+          this.loadingConfig = false;
+        });
+      }
+    },
+    hasStorageConfiguration() {
+      return localStorage.config !== undefined;
+    },
     getImageProfileURL(image) {
       return (
         this.configuration.images.secure_base_url +
-        this.configuration.images.profile_sizes[3] + image
+        this.configuration.images.profile_sizes[3] +
+        image
       );
     },
     getCast() {
