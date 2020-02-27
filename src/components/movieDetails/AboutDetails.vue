@@ -125,9 +125,11 @@
 <script>
 import { HTTP } from "../../plugins/axios";
 import { mapActions } from "vuex";
+import { configurationMixins } from "../../mixins/configuration";
 
 export default {
   name: "AboutDetails",
+  mixins: [configurationMixins],
   props: ["id"],
   data() {
     return {
@@ -136,30 +138,13 @@ export default {
       isImageLoading: true,
       isMovieLoading: true,
       loadingConfig: true,
-      configuration: {}
     };
   },
   async created() {
-    this.setConfiguration();
     this.getImages();
     this.getMovie();
   },
   methods: {
-    setConfiguration() {
-      if (this.hasStorageConfiguration()) {
-        this.configuration = JSON.parse(localStorage.config);
-        this.loadingConfig = false;
-      } else {
-        HTTP.get("configuration").then(res => {
-          localStorage.setItem("config", JSON.stringify(res.data));
-          this.configuration = JSON.parse(localStorage.config);
-          this.loadingConfig = false;
-        });
-      }
-    },
-    hasStorageConfiguration() {
-      return localStorage.config !== undefined;
-    },
     getImageURL(image) {
       return (
         this.configuration.images.secure_base_url +

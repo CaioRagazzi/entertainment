@@ -30,38 +30,22 @@
 
 <script>
 import { HTTP } from "../../plugins/axios";
+import { configurationMixins } from "../../mixins/configuration";
 
 export default {
   name: "CastDetails",
+  mixins: [configurationMixins],
   props: ["id"],
   data() {
     return {
       casts: [],
       isCastLoading: true,
-      loadingConfig: true,
-      configuration: {}
     };
   },
-  async created() {
-    this.setConfiguration();
+  created() {
     this.getCast();
   },
   methods: {
-    setConfiguration() {
-      if (this.hasStorageConfiguration()) {
-        this.configuration = JSON.parse(localStorage.config);
-        this.loadingConfig = false;
-      } else {
-        HTTP.get("configuration").then(res => {
-          localStorage.setItem("config", JSON.stringify(res.data));
-          this.configuration = JSON.parse(localStorage.config);
-          this.loadingConfig = false;
-        });
-      }
-    },
-    hasStorageConfiguration() {
-      return localStorage.config !== undefined;
-    },
     getImageProfileURL(image) {
       return (
         this.configuration.images.secure_base_url +

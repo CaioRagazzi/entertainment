@@ -11,49 +11,30 @@
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
+import { configurationMixins } from "../../mixins/configuration";
 
 export default {
   name: "MovieCard",
+  mixins: [configurationMixins],
   props: ["image", "id", "loading"],
   data() {
     return {
-      configuration: undefined,
       loadingConfig: true
     };
   },
-  created() {
-    this.setConfiguration();
-  },
   methods: {
-    setConfiguration() {
-      if (this.hasStorageConfiguration()) {
-        this.configuration = JSON.parse(localStorage.config);
-        this.loadingConfig = false;
-      } else {
-        HTTP.get("configuration").then(res => {
-          localStorage.setItem("config", JSON.stringify(res.data));
-          this.configuration = JSON.parse(localStorage.config);
-          this.loadingConfig = false;
-        });
-      }
-    },
-    hasStorageConfiguration() {
-      return localStorage.config !== undefined;
-    },
     goToDetails() {
       this.$router.push({ name: "MovieDetails", params: { id: this.id } });
     },
     getImagePosterURL(image) {
       if (this.configuration === undefined) {
         return;
-      } else {
-        return (
-          this.configuration.images.secure_base_url +
-          this.configuration.images.poster_sizes[4] +
-          image
-        );
       }
+      return (
+        this.configuration.images.secure_base_url +
+        this.configuration.images.poster_sizes[4] +
+        image
+      );
     }
   }
 };
