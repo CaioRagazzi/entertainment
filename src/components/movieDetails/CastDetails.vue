@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-container>
     <div v-else class="d-flex align-center" v-for="cast in casts" :key="cast.cast_id">
-      <div>
+      <div class="container-cart-img" @click="goToCast(cast.id)">
         <v-img class="mb-2 ml-3 my-img" :src="getImageProfileURL(cast.profile_path)" width="8rem"></v-img>
       </div>
       <v-container class="pl-3" style="width: 12rem">
@@ -72,6 +72,9 @@ export default {
         this.isCastLoading = false;
       });
     },
+    goToCast(id) {
+      this.$router.push({ name: "CastDetails", params: { id: id } });
+    },
     cleanFields() {
       this.casts = [];
     }
@@ -86,6 +89,9 @@ export default {
 </script>
 
 <style scoped>
+.container-cart-img{
+  cursor: pointer;
+}
 .my-img {
   border-radius: 10%;
 }
