@@ -30,7 +30,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col cols="12" sm="8">
+          <v-col cols="15">
             <v-list-item v-if="cast.homepage" two-line>
               <v-list-item-content>
                 <v-list-item-title>Home Page:</v-list-item-title>
@@ -40,7 +40,6 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-        </v-row>
         <v-col cols="12" sm="4">
           <v-list-item v-if="cast.deathday" two-line>
             <v-list-item-content>
@@ -49,7 +48,6 @@
             </v-list-item-content>
           </v-list-item>
         </v-col>
-        <v-row no-gutters>
           <v-col cols="12" sm="4">
             <v-list-item v-if="cast.place_of_birth" two-line>
               <v-list-item-content>

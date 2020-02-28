@@ -9,29 +9,36 @@
       </div>
       <v-container class="pl-3" style="width: 12rem">
         <v-list>
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title>Character</v-list-item-title>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-list-item-subtitle v-on="on">{{ cast.character }}</v-list-item-subtitle>
-                </template>
-                <span>{{ cast.character }}</span>
-              </v-tooltip>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title>Name</v-list-item-title>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-list-item-subtitle v-on="on">{{ cast.name }}</v-list-item-subtitle>
-                </template>
-                <span>{{ cast.character }}</span>
-              </v-tooltip>
-            </v-list-item-content>
-          </v-list-item>
+          <v-row no-gutters>
+            <v-col cols="12" sm="12">
+              <v-list-item two-line>
+                <v-list-item-content>
+                  <v-list-item-title>Character</v-list-item-title>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-list-item-subtitle v-on="on">{{ cast.character }}</v-list-item-subtitle>
+                    </template>
+                    <span>{{ cast.character }}</span>
+                  </v-tooltip>
+                </v-list-item-content>
+              </v-list-item>
+            </v-col>
+          </v-row>
+          <v-row no-gutters>
+            <v-col cols="12" sm="20">
+              <v-list-item two-line>
+                <v-list-item-content>
+                  <v-list-item-title>Name</v-list-item-title>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-list-item-subtitle v-on="on">{{ cast.name }}</v-list-item-subtitle>
+                    </template>
+                    <span>{{ cast.character }}</span>
+                  </v-tooltip>
+                </v-list-item-content>
+              </v-list-item>
+            </v-col>
+          </v-row>
         </v-list>
       </v-container>
     </div>
@@ -89,7 +96,7 @@ export default {
 </script>
 
 <style scoped>
-.container-cart-img{
+.container-cart-img {
   cursor: pointer;
 }
 .my-img {
