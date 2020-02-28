@@ -28,7 +28,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('/Popular')" link>
+        <v-list-item @click="goTo('/PopularMovies')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-account-box' }}</v-icon>
           </v-list-item-icon>
