@@ -8,8 +8,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider></v-divider>
-
         <v-list-item @click="goTo('/')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-view-dashboard' }}</v-icon>
@@ -40,7 +38,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('/TopRated')" link>
+        <v-list-item @click="goTo('/TopRatedMovies')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-chevron-triple-up' }}</v-icon>
           </v-list-item-icon>
@@ -51,6 +49,23 @@
         </v-list-item>
 
         <v-divider></v-divider>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">Casts</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+
+        <v-list-item @click="goTo('/PopularCast')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-account-box' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Popular</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-snackbar v-model="isAlert" top right color="warning">
