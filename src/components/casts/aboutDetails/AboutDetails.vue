@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <CarouselImages :id="id" />
+    <CastInfo :castId="id" />
   </v-container>
 </template>
 
@@ -8,11 +9,13 @@
 import { HTTP } from "../../../plugins/axios";
 import { mapActions } from "vuex";
 import CarouselImages from "./CarouselImages";
+import CastInfo from "./CastInfo";
 
 export default {
   name: "AboutDetails",
   components: {
-    CarouselImages
+    CarouselImages,
+    CastInfo
   },
   props: ["id"],
   created() {
