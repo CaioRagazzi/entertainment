@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { HTTP } from "../../../plugins/axios";
+import { HTTP } from "../../../../plugins/axios";
 import { mapActions } from "vuex";
 import CarouselImages from "./CarouselImages";
 import MovieInfo from "./MovieInfo";

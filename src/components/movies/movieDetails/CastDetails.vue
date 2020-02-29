@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
-import { configurationMixins } from "../../mixins/configuration";
+import { HTTP } from "../../../plugins/axios";
+import { configurationMixins } from "../../../mixins/configuration";
 
 export default {
   name: "CastDetails",

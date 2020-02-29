@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { configurationMixins } from "../../../mixins/configuration";
-import { HTTP } from "../../../plugins/axios";
+import { configurationMixins } from "../../../../mixins/configuration";
+import { HTTP } from "../../../../plugins/axios";
 
 export default {
   name: "CarouselImages",

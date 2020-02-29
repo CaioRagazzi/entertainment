@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import MovieGrid from "../../components/movies/MovieGrid";
-import { HTTP } from "../../plugins/axios";
+import MovieGrid from "../../../components/movies/MovieGrid";
+import { HTTP } from "../../../plugins/axios";
 
 export default {
   name: "SimilarMovies",

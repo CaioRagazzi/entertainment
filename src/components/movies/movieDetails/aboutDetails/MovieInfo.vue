@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { HTTP } from "../../../plugins/axios";
+import { HTTP } from "../../../../plugins/axios";
 
 export default {
   name: "MovieInfo",

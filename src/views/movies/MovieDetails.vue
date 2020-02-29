@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import AboutDetails from "../../components/movieDetails/aboutDetails/AboutDetails";
-import RelatedVideosDetails from "../../components/movieDetails/RelatedVideosDetails";
-import CastDetails from "../../components/movieDetails/CastDetails";
-import SimilarDetails from "../../components/movieDetails/SimilarDetails";
+import AboutDetails from "../../components/movies/movieDetails/aboutDetails/AboutDetails";
+import RelatedVideosDetails from "../../components/movies/movieDetails/RelatedVideosDetails";
+import CastDetails from "../../components/movies/movieDetails/CastDetails";
+import SimilarDetails from "../../components/movies/movieDetails/SimilarDetails";
 
 export default {
   name: "MovieDetails",
