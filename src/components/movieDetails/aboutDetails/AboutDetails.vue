@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <CarouselImages :id="id" />
     <MovieInfo :movieId="id" />
   </v-container>

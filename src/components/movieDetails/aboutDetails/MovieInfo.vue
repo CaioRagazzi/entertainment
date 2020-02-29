@@ -22,7 +22,7 @@
       </v-container>
       <v-container>
         <v-row no-gutters>
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item two-line>
               <v-list-item-content>
                 <v-list-item-title>Budget:</v-list-item-title>
@@ -30,7 +30,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item v-if="movie.homepage" two-line>
               <v-list-item-content>
                 <v-list-item-title>Home Page:</v-list-item-title>
@@ -40,7 +40,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item two-line>
               <v-list-item-content>
                 <v-list-item-title>Adult:</v-list-item-title>
@@ -50,7 +50,7 @@
           </v-col>
         </v-row>
         <v-row no-gutters>
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item two-line>
               <v-list-item-content>
                 <v-list-item-title>Original Language:</v-list-item-title>
@@ -58,7 +58,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item two-line>
               <v-list-item-content>
                 <v-list-item-title>Original Title:</v-list-item-title>
@@ -67,7 +67,7 @@
             </v-list-item>
           </v-col>
 
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item two-line>
               <v-list-item-content>
                 <v-list-item-title>Release Date:</v-list-item-title>
@@ -77,7 +77,7 @@
           </v-col>
         </v-row>
         <v-row no-gutters>
-          <v-col cols="12" sm="4">
+          <v-col cols="20" sm="4">
             <v-list-item v-if="movie.tagline" two-line>
               <v-list-item-content>
                 <v-list-item-title>Tagline:</v-list-item-title>
@@ -127,5 +127,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

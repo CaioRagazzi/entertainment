@@ -7,6 +7,7 @@
         :id="movie.id"
         :image="movie.poster_path"
         :loading="loading"
+        :title="movie.title"
       />
     </div>
   </div>

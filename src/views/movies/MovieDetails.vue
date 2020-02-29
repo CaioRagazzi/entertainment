@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container-details">
+  <v-container class="container-details" fluid>
     <v-btn @click="goBack()" class="mb-2" color="white">
       <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
