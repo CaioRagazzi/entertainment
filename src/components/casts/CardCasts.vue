@@ -61,20 +61,20 @@ export default {
 }
 @media screen and (max-width: 600px) and (min-width: 100px) {
   .my-card {
-    width: 70vw;
-    height: 70vh;
+    width: 75vw;
+    height: 55vh;
   }
 }
 @media screen and (max-width: 1000px) and (min-width: 600px) {
   .my-card {
-    width: 20vw;
-    height: 40vh;
+    width: 35vw;
+    height: 35vh;
   }
 }
 @media screen and (max-width: 1200px) and (min-width: 1000px) {
   .my-card {
-    width: 20vw;
-    height: 50vh;
+    width: 35vw;
+    height: 35vh;
   }
 }
 </style>
