@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <div v-if="isMovieLoading" class="d-flex justify-center align-center">
       <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
     </div>
-    <v-container v-else>
+    <v-container fluid v-else>
       <v-container class="d-flex flex-wrap justify-center">
         <v-chip
           class="ml-1 mt-1"

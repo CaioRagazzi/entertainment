@@ -3,7 +3,7 @@
     <v-btn @click="goBack()" class="mb-2" color="white">
       <v-icon left>mdi-arrow-left</v-icon>Back
     </v-btn>
-    <v-card class="mx-auto">
+    <v-card>
       <v-tabs v-model="CurrentTab">
         <v-tab>
           <v-icon left>mdi-filmstrip</v-icon>About
@@ -76,6 +76,6 @@ export default {
 
 <style scoped>
 .container-details {
-  max-width: 90%;
+  max-width: 100%;
 }
 </style>
