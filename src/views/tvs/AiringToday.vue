@@ -48,7 +48,6 @@ export default {
       HTTP.get("tv/airing_today", {
         params: { page: this.currentPage }
       }).then(res => {
-        console.log(res.data.results);
         this.totalPages = res.data.total_pages;
         this.tvs = res.data.results;
         this.loading = false;

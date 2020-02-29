@@ -3,7 +3,12 @@
     <v-container class="d-flex justify-center align-center" v-if="loadingConfig">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-container>
-    <v-card :loading="loading || image == null" hover class="mb-5 mr-5 my-card">
+    <v-card
+      :loading="loading || image == null"
+      @click="goToDetails"
+      hover
+      class="mb-5 mr-5 my-card"
+    >
       <div v-if="image === null || image === undefined">
         <h5>Image not avaiable</h5>
         <v-row align="end" class="lightbox white--text pa-2 fill-height">
@@ -41,7 +46,7 @@ export default {
   },
   methods: {
     goToDetails() {
-      this.$router.push({ name: "MovieDetails", params: { id: this.id } });
+      this.$router.push({ name: "TVDetails", params: { id: this.id } });
     },
     getImagePosterURL(image) {
       if (this.configuration === undefined) {

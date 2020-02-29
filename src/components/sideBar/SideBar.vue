@@ -52,25 +52,6 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="title">Casts</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-
-        <v-list-item @click="goTo('/PopularCast')" link>
-          <v-list-item-icon>
-            <v-icon>{{ 'mdi-account-box' }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Popular</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item>
-          <v-list-item-content>
             <v-list-item-title class="title">TV</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -82,6 +63,24 @@
 
           <v-list-item-content>
             <v-list-item-title>Airing Today</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">Casts</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item @click="goTo('/PopularCast')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-account-box' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Popular</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
