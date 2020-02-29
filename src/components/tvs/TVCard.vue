@@ -3,22 +3,22 @@
     <v-container class="d-flex justify-center align-center" v-if="loadingConfig">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-container>
-    <v-card :loading="loading || image == null" @click="goToDetails" hover class="mb-5 mr-5 my-card">
+    <v-card :loading="loading || image == null" hover class="mb-5 mr-5 my-card">
       <div v-if="image === null || image === undefined">
         <h5>Image not avaiable</h5>
         <v-row align="end" class="lightbox white--text pa-2 fill-height">
           <div class="text-img">
             <v-col>
-              <div class="subheading">{{ castName }}</div>
+              <div class="subheading">{{ title }}</div>
             </v-col>
           </div>
         </v-row>
       </div>
-      <v-img v-else height="100%" width="100%" class="my-img" :src="getImagePosterURL(image)">
+      <v-img v-else height="100%" width="100%" :src="getImagePosterURL(image)">
         <v-row align="end" class="lightbox white--text pa-2 fill-height">
           <div class="text-img">
             <v-col>
-              <div class="subheading">{{ castName }}</div>
+              <div class="subheading">{{ title }}</div>
             </v-col>
           </div>
         </v-row>
@@ -31,9 +31,9 @@
 import { configurationMixins } from "../../mixins/configuration";
 
 export default {
-  name: "CastCard",
+  name: "TVCard",
   mixins: [configurationMixins],
-  props: ["image", "id", "loading", "castName"],
+  props: ["image", "id", "loading", "title"],
   data() {
     return {
       loadingConfig: true
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     goToDetails() {
-      this.$router.push({ name: "CastDetails", params: { id: this.id } });
+      this.$router.push({ name: "MovieDetails", params: { id: this.id } });
     },
     getImagePosterURL(image) {
       if (this.configuration === undefined) {
@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 .text-img {
-  background-color: rgba(0,0,0, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 0% 25px 25px 0%;
 }
 .my-card {

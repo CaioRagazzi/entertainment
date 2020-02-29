@@ -7,6 +7,7 @@ import TopRatedMovies from "../views/movies/TopRatedMovies";
 import MovieDetails from "../views/movies/MovieDetails";
 import CastDetails from "../views/casts/CastDetails";
 import PopularCasts from "../views/casts/PopularCasts";
+import AiringToday from "../views/tv/AiringToday";
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/PopularCast',
     name: 'PopularCast',
     component: PopularCasts
+  },
+  {
+    path: '/TV/AiringToday',
+    name: 'AiringToday',
+    component: AiringToday
   },
   {
     path: '/movie/:id',

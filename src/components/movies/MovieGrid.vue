@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="d-flex flex-wrap justify-center">
       <MovieCard
         v-for="movie in movies"
@@ -10,14 +9,13 @@
         :title="movie.title"
       />
     </div>
-  </div>
 </template>
 
 <script>
 import MovieCard from "./MovieCard";
 
 export default {
-  name: "Upcoming",
+  name: "MovieGrid",
   props: ["movies", "loading"],
   components: {
     MovieCard

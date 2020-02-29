@@ -56,6 +56,7 @@ export default {
     changePage(event) {
       this.currentPage = event;
       this.getCasts();
+      window.scrollTo(0, 0);
     }
   }
 };

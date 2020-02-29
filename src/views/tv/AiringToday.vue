@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
     <div>
-      <MovieGrid :movies="movies" :loading="loading" />
+      <TVGrid :tvs="tvs" :loading="loading" />
       <div>
         <v-pagination
           :length="totalPages"
@@ -18,44 +18,45 @@
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
-import MovieGrid from "../../components/movies/MovieGrid";
 import { mapActions } from "vuex";
+import { HTTP } from "../../plugins/axios";
+import TVGrid from "../../components/tvs/TVGrid";
 
 export default {
-  name: "Popular",
+  name: "AiringTodays",
   components: {
-    MovieGrid
+    TVGrid
+  },
+  created() {
+    this.getAiringToday();
+    this.setTitle("AiringToday");
   },
   data() {
     return {
-      movies: [],
+      tvs: [],
       currentPage: 1,
       totalPages: 0,
       loading: true
     };
   },
-  created() {
-    this.getMovies();
-    this.setTitle("Popular");
-  },
   methods: {
     ...mapActions({
       setTitle: "navBar/setTitle"
     }),
-    getMovies() {
+    getAiringToday() {
       this.loading = true;
-      HTTP.get("movie/popular", {
+      HTTP.get("tv/airing_today", {
         params: { page: this.currentPage }
       }).then(res => {
-        this.movies = res.data.results;
+        console.log(res.data.results);
         this.totalPages = res.data.total_pages;
+        this.tvs = res.data.results;
         this.loading = false;
       });
     },
     changePage(event) {
       this.currentPage = event;
-      this.getMovies();
+      this.getAiringToday();
       window.scrollTo(0, 0);
     }
   }
