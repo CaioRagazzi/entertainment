@@ -47,7 +47,6 @@ export default {
   methods: {
     goToDetails() {
       if (this.type === "season") {
-        console.log("oi");
       } else {
         this.$router.push({ name: "TVDetails", params: { id: this.id } });
       }
