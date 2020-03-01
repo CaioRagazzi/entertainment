@@ -41,12 +41,14 @@ export default {
   props: ["image", "id", "loading", "title", "type"],
   data() {
     return {
-      loadingConfig: true
+      loadingConfig: true,
+      season: false
     };
   },
   methods: {
     goToDetails() {
       if (this.type === "season") {
+        this.season = true
       } else {
         this.$router.push({ name: "TVDetails", params: { id: this.id } });
       }
