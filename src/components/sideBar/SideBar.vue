@@ -100,7 +100,7 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="title">Casts</v-list-item-title>
+            <v-list-item-title class="title">Cast</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
