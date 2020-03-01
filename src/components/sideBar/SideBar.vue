@@ -66,6 +66,16 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item @click="goTo('/TV/OnTheAir')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-movie-roll' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>On The Air</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-divider></v-divider>
 
         <v-list-item>

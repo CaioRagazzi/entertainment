@@ -6,6 +6,7 @@ import PopularMovies from "../views/movies/PopularMovies";
 import TopRatedMovies from "../views/movies/TopRatedMovies";
 import PopularCasts from "../views/casts/PopularCasts";
 import AiringToday from "../views/tvs/AiringToday";
+import OnTheAir from "../views/tvs/OnTheAir";
 import MovieDetails from "../views/movies/MovieDetails";
 import CastDetails from "../views/casts/CastDetails";
 import TVDetails from "../views/tvs/TVDetails";
@@ -42,6 +43,11 @@ const routes = [
     path: '/TV/AiringToday',
     name: 'AiringToday',
     component: AiringToday
+  },
+  {
+    path: '/TV/OnTheAir',
+    name: 'OnTheAir',
+    component: OnTheAir
   },
   {
     path: '/movie/:id',

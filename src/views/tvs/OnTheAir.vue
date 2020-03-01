@@ -23,13 +23,13 @@ import { HTTP } from "../../plugins/axios";
 import TVGrid from "../../components/tvs/TVGrid";
 
 export default {
-  name: "AiringTodays",
+  name: "OnTheAir",
   components: {
     TVGrid
   },
   created() {
-    this.getAiringToday();
-    this.setTitle("Airing Today");
+    this.getOnTheAir();
+    this.setTitle("On the air");
   },
   data() {
     return {
@@ -43,9 +43,9 @@ export default {
     ...mapActions({
       setTitle: "navBar/setTitle"
     }),
-    getAiringToday() {
+    getOnTheAir() {
       this.loading = true;
-      HTTP.get("tv/airing_today", {
+      HTTP.get("tv/on_the_air", {
         params: { page: this.currentPage }
       }).then(res => {
         this.totalPages = res.data.total_pages;
@@ -55,7 +55,7 @@ export default {
     },
     changePage(event) {
       this.currentPage = event;
-      this.getAiringToday();
+      this.getOnTheAir();
       window.scrollTo(0, 0);
     }
   }
