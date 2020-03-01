@@ -38,7 +38,7 @@ import { configurationMixins } from "../../mixins/configuration";
 export default {
   name: "TVCard",
   mixins: [configurationMixins],
-  props: ["image", "id", "loading", "title"],
+  props: ["image", "id", "loading", "title", "type"],
   data() {
     return {
       loadingConfig: true
@@ -46,7 +46,11 @@ export default {
   },
   methods: {
     goToDetails() {
-      this.$router.push({ name: "TVDetails", params: { id: this.id } });
+      if (this.type === "season") {
+        console.log("oi");
+      } else {
+        this.$router.push({ name: "TVDetails", params: { id: this.id } });
+      }
     },
     getImagePosterURL(image) {
       if (this.configuration === undefined) {

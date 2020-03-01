@@ -7,6 +7,7 @@
       :image="tv.poster_path"
       :loading="loading"
       :title="tv.name"
+      :type="type"
     />
   </div>
 </template>
@@ -19,7 +20,7 @@ export default {
   components: {
     TVCard
   },
-  props: ["tvs", "loading"]
+  props: ["tvs", "loading", "type"]
 };
 </script>
 

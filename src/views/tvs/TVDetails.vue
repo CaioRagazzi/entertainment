@@ -8,8 +8,14 @@
         <v-tab>
           <v-icon left>mdi-filmstrip</v-icon>About
         </v-tab>
+        <v-tab>
+          <v-icon left>mdi-filmstrip</v-icon>Seasons
+        </v-tab>
         <v-tab-item>
           <AboutDetails :id="getIdParam" />
+        </v-tab-item>
+        <v-tab-item>
+          <Seasons :id="getIdParam" />
         </v-tab-item>
       </v-tabs>
     </v-card>
@@ -18,11 +24,13 @@
 
 <script>
 import AboutDetails from "../../components/tvs/aboutDetails/AboutDetails";
+import Seasons from "../../components/tvs/aboutDetails/Seasons";
 
 export default {
   name: "TVDetails",
   components: {
-    AboutDetails
+    AboutDetails,
+    Seasons
   },
   data() {
     return {
