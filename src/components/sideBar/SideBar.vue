@@ -76,6 +76,26 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item @click="goTo('/TV/Popular')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-account-box' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Popular</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item @click="goTo('/TV/TopRatedTV')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-chevron-triple-up' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Top Rated</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-divider></v-divider>
 
         <v-list-item>
