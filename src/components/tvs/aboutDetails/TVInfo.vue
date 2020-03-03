@@ -43,7 +43,7 @@
           <v-col cols="12" sm="4">
             <v-list-item v-if="tv.status" two-line>
               <v-list-item-content>
-                <v-list-item-title>Statue:</v-list-item-title>
+                <v-list-item-title>Status:</v-list-item-title>
                 <v-list-item-subtitle>{{ tv.status }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>

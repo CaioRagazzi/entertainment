@@ -106,6 +106,16 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item @click="goTo('/TV/Search')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-file-find' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Search</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-divider></v-divider>
 
         <v-list-item>
@@ -121,6 +131,16 @@
 
           <v-list-item-content>
             <v-list-item-title>Popular</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item @click="goTo('/Cast/Search')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-file-find' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Search</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

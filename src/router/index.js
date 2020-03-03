@@ -4,14 +4,16 @@ import UpCommingMovies from "../views/movies/UpCommingMovies";
 import LatestMovies from "../views/movies/LatestMovies";
 import PopularMovies from "../views/movies/PopularMovies";
 import TopRatedMovies from "../views/movies/TopRatedMovies";
-import Search from "../views/movies/Search";
+import SearchMovie from "../views/movies/Search";
 import PopularCasts from "../views/casts/PopularCasts";
 import AiringToday from "../views/tvs/AiringToday";
 import OnTheAir from "../views/tvs/OnTheAir";
 import PopularTV from "../views/tvs/PopularTV";
 import TopRatedTV from "../views/tvs/TopRatedTV";
+import SearchTV from "../views/tvs/Search";
 import MovieDetails from "../views/movies/MovieDetails";
 import CastDetails from "../views/casts/CastDetails";
+import SearchCast from "../views/casts/Search";
 import TVDetails from "../views/tvs/TVDetails";
 
 Vue.use(VueRouter)
@@ -40,12 +42,18 @@ const routes = [
   {
     path: '/Movie/Search',
     name: 'SearchMovies',
-    component: Search
+    component: SearchMovie
   },
   {
     path: '/Cast/Popular',
     name: 'PopularCast',
     component: PopularCasts
+  },
+  
+  {
+    path: '/Cast/Search',
+    name: 'SearchCast',
+    component: SearchCast
   },
   {
     path: '/TV/AiringToday',
@@ -66,6 +74,11 @@ const routes = [
     path: '/TV/TopRatedTV',
     name: 'TopRatedTV',
     component: TopRatedTV
+  },
+  {
+    path: '/TV/Search',
+    name: 'SearchTV',
+    component: SearchTV
   },
   {
     path: '/movie/:id',

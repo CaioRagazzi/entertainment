@@ -6,7 +6,7 @@
       <div v-if="isLoading" class="d-flex justify-center">
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
       </div>
-      <Grid v-else :data="movies" :loading="isLoading" type="movie" />
+      <Grid v-else :data="movies" :loading="isLoading" type="tv" />
       <v-snackbar v-model="isAlert" top right color="warning">
         <b class="black--text">Your search returned zero results</b>
         <v-btn color="black" text @click="isAlert = false">Close</v-btn>
@@ -30,12 +30,12 @@ import Grid from "../../components/grid/Grid";
 import { mapActions } from "vuex";
 
 export default {
-  name: "SearchMovie",
+  name: "SearchTV",
   components: {
     Grid
   },
   created() {
-    this.setTitle("Search Movies");
+    this.setTitle("Search TV Shows");
   },
   data() {
     return {
@@ -61,7 +61,7 @@ export default {
     }),
     search() {
       this.isLoading = true;
-      HTTP.get("search/movie", {
+      HTTP.get("search/tv", {
         params: { page: this.currentPage, query: this.searchInfo }
       }).then(res => {
         this.movies = res.data.results;
