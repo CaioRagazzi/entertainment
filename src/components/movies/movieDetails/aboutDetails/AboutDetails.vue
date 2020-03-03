@@ -18,7 +18,10 @@ export default {
     MovieInfo
   },
   props: ["id"],
-  created() {
+  updated(){
+    this.setTitle();
+  },
+  mounted() {
     this.setTitle();
   },
   methods: {
