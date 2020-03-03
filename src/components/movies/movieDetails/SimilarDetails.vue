@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-container>
     <v-container v-else>
-      <MovieGrid :movies="similarMovies" />
+      <Grid :data="similarMovies" :loading="isSimilarLoading" type="movie" />
       <div>
         <v-pagination
           :length="totalPages"
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import MovieGrid from "../../../components/movies/MovieGrid";
+import Grid from "../../../components/grid/Grid";
 import { HTTP } from "../../../plugins/axios";
 
 export default {
   name: "SimilarMovies",
   components: {
-    MovieGrid
+    Grid
   },
   props: ["id"],
   data() {

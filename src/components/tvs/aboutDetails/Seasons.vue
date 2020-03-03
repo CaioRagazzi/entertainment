@@ -1,11 +1,11 @@
 <template>
   <div class="d-flex flex-wrap justify-center pt-3">
-    <TVGrid :tvs="seasons" :loading="isSeasonsLoading" type="season" />
+    <Grid :data="seasons" :loading="isSeasonsLoading" type="season" />
   </div>
 </template>
 
 <script>
-import TVGrid from "../TVGrid";
+import Grid from "../../grid/Grid";
 import { HTTP } from "../../../plugins/axios";
 
 export default {
@@ -17,7 +17,7 @@ export default {
     };
   },
   components: {
-    TVGrid
+    Grid
   },
   props: ["id"],
   created() {

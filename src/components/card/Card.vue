@@ -11,15 +11,8 @@
     >
       <div v-if="image === null || image === undefined">
         <h5>Image not avaiable</h5>
-        <v-row align="end" class="lightbox white--text pa-2 fill-height">
-          <div class="text-img">
-            <v-col>
-              <div class="subheading">{{ title }}</div>
-            </v-col>
-          </div>
-        </v-row>
       </div>
-      <v-img v-else height="100%" width="100%" :src="getImagePosterURL(image)">
+      <v-img v-else height="100%" width="100%" :src="getImage(image)">
         <v-row align="end" class="lightbox white--text pa-2 fill-height">
           <div class="text-img">
             <v-col>
@@ -36,32 +29,61 @@
 import { configurationMixins } from "../../mixins/configuration";
 
 export default {
-  name: "TVCard",
+  name: "Card",
   mixins: [configurationMixins],
   props: ["image", "id", "loading", "title", "type"],
   data() {
     return {
-      loadingConfig: true,
-      season: false
+      loadingConfig: true
     };
   },
   methods: {
     goToDetails() {
-      if (this.type === "season") {
-        this.season = true
-      } else {
+      if (this.type === "movie") {
+        this.$router.push({ name: "MovieDetails", params: { id: this.id } });
+        return;
+      }
+      if (this.type === "cast") {
+        this.$router.push({ name: "CastDetails", params: { id: this.id } });
+        return;
+      }
+      if (this.type === "tv") {
         this.$router.push({ name: "TVDetails", params: { id: this.id } });
+        return;
       }
     },
-    getImagePosterURL(image) {
+    getImage(image) {
       if (this.configuration === undefined) {
         return;
       }
-      return (
-        this.configuration.images.secure_base_url +
-        this.configuration.images.poster_sizes[4] +
-        image
-      );
+      if (this.type === "movie") {
+        return (
+          this.configuration.images.secure_base_url +
+          this.configuration.images.poster_sizes[4] +
+          image
+        );
+      }
+      if (this.type === "cast") {
+        return (
+          this.configuration.images.secure_base_url +
+          this.configuration.images.poster_sizes[4] +
+          image
+        );
+      }
+      if (this.type === "tv" || this.type === "season") {
+        return (
+          this.configuration.images.secure_base_url +
+          this.configuration.images.poster_sizes[4] +
+          image
+        );
+      }
+      if (this.type === "season") {
+        return (
+          this.configuration.images.secure_base_url +
+          this.configuration.images.poster_sizes[4] +
+          image
+        );
+      }
     }
   }
 };

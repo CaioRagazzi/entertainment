@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
     <div>
-      <MovieGrid :movies="movies" :loading="loading" />
+      <Grid :data="movies" :loading="loading" type="movie" />
       <div>
         <v-pagination
           :length="totalPages"
@@ -19,13 +19,13 @@
 
 <script>
 import { HTTP } from "../../plugins/axios";
-import MovieGrid from "../../components/movies/MovieGrid";
+import Grid from "../../components/grid/Grid";
 import { mapActions } from "vuex";
 
 export default {
   name: "NowPlaying",
   components: {
-    MovieGrid
+    Grid
   },
   data() {
     return {

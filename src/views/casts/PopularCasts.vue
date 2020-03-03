@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div v-if="loading" class="d-flex justify-center align-center">
+    <div v-if="isPopularCastloading" class="d-flex justify-center align-center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
     <div>
-      <CastGrid :casts="casts" :loading="loading" />
+      <Grid :data="casts" :loading="isPopularCastloading" type="cast" />
       <div>
         <v-pagination
           :length="totalPages"
@@ -19,20 +19,20 @@
 
 <script>
 import { HTTP } from "../../plugins/axios";
-import CastGrid from "../../components/casts/CastGrid";
+import Grid from "../../components/grid/Grid";
 import { mapActions } from "vuex";
 
 export default {
   name: "Po",
   components: {
-    CastGrid
+    Grid
   },
   data() {
     return {
       casts: [],
       currentPage: 1,
       totalPages: 0,
-      loading: true
+      isPopularCastloading: true
     };
   },
   created() {
@@ -44,12 +44,12 @@ export default {
       setTitle: "navBar/setTitle"
     }),
     getCasts() {
-      this.loading = true;
+      this.isPopularCastloading = true;
       HTTP.get("person/popular", { params: { page: this.currentPage } }).then(
         res => {
           this.casts = res.data.results;
           this.totalPages = res.data.total_pages;
-          this.loading = false;
+          this.isPopularCastloading = false;
         }
       );
     },

@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
     <div>
-      <TVGrid :tvs="tvs" :loading="loading" />
+      <Grid :data="tvs" :loading="loading" type="tv" />
       <div>
         <v-pagination
           :length="totalPages"
@@ -20,12 +20,12 @@
 <script>
 import { mapActions } from "vuex";
 import { HTTP } from "../../plugins/axios";
-import TVGrid from "../../components/tvs/TVGrid";
+import Grid from "../../components/grid/Grid";
 
 export default {
   name: "AiringTodays",
   components: {
-    TVGrid
+    Grid
   },
   created() {
     this.getAiringToday();
