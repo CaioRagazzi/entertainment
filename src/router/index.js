@@ -4,6 +4,7 @@ import UpCommingMovies from "../views/movies/UpCommingMovies";
 import LatestMovies from "../views/movies/LatestMovies";
 import PopularMovies from "../views/movies/PopularMovies";
 import TopRatedMovies from "../views/movies/TopRatedMovies";
+import Search from "../views/movies/Search";
 import PopularCasts from "../views/casts/PopularCasts";
 import AiringToday from "../views/tvs/AiringToday";
 import OnTheAir from "../views/tvs/OnTheAir";
@@ -22,22 +23,27 @@ const routes = [
     component: UpCommingMovies,
   },
   {
-    path: '/NowPlaying',
-    name: 'NowPlaying',
+    path: '/Movie/NowPlaying',
+    name: 'NowPlayingMovies',
     component: LatestMovies,
   },
   {
-    path: '/PopularMovies',
-    name: 'Popular',
+    path: '/Movie/Popular',
+    name: 'PopularMovies',
     component: PopularMovies
   },
   {
-    path: '/TopRatedMovies',
-    name: 'TopRated',
+    path: '/Movie/TopRated',
+    name: 'TopRatedMovies',
     component: TopRatedMovies
   },
   {
-    path: '/PopularCast',
+    path: '/Movie/Search',
+    name: 'SearchMovies',
+    component: Search
+  },
+  {
+    path: '/Cast/Popular',
     name: 'PopularCast',
     component: PopularCasts
   },

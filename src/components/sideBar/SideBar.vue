@@ -18,7 +18,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('/NowPlaying')" link>
+        <v-list-item @click="goTo('/Movie/NowPlaying')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-newspaper' }}</v-icon>
           </v-list-item-icon>
@@ -28,7 +28,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('/PopularMovies')" link>
+        <v-list-item @click="goTo('/Movie/Popular')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-account-box' }}</v-icon>
           </v-list-item-icon>
@@ -38,13 +38,23 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('/TopRatedMovies')" link>
+        <v-list-item @click="goTo('/Movie/TopRated')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-chevron-triple-up' }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>Top Rated</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item @click="goTo('/Movie/Search')" link>
+          <v-list-item-icon>
+            <v-icon>{{ 'mdi-file-find' }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Search</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -104,7 +114,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="goTo('/PopularCast')" link>
+        <v-list-item @click="goTo('/Cast/Popular')" link>
           <v-list-item-icon>
             <v-icon>{{ 'mdi-account-box' }}</v-icon>
           </v-list-item-icon>
