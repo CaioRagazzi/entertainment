@@ -7,7 +7,7 @@
         :image="getImage(item)"
         :loading="loading"
         :title="getTitle(item)"
-        :type="type"
+        :type="getType(item)"
       />
     </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
   methods:{
     getImage(item){
-      if (this.type === "movie" || this.type === "tv" || this.type === "season") {        
+      if (this.type === "movie" || item.media_type === "movie" || this.type === "tv" || item.media_type === "tv" || this.type === "season") {        
         return item.poster_path
       }
       if (this.type === "cast") {
@@ -31,11 +31,18 @@ export default {
       }
     },
     getTitle(item){
-      if (this.type === "movie") {
+      if (this.type === "movie" || item.media_type === "movie") {
         return item.title
       }
-      if (this.type === "cast" || this.type === "tv" || this.type === "season") {
+      if (this.type === "cast" || this.type === "tv" || item.media_type === "tv" || this.type === "season") {
         return item.name
+      }
+    },
+    getType(item){
+      if (item.media_type) {
+        return item.media_type
+      } else {
+        return this.type
       }
     }
   }

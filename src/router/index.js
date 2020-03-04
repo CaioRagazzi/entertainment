@@ -14,6 +14,7 @@ import SearchTV from "../views/tvs/Search";
 import MovieDetails from "../views/movies/MovieDetails";
 import CastDetails from "../views/casts/CastDetails";
 import SearchCast from "../views/casts/Search";
+import SearchAll from "../views/search/Search";
 import TVDetails from "../views/tvs/TVDetails";
 
 Vue.use(VueRouter)
@@ -79,6 +80,11 @@ const routes = [
     path: '/TV/Search',
     name: 'SearchTV',
     component: SearchTV
+  },
+  {
+    path: '/All/Search',
+    name: 'SearchAll',
+    component: SearchAll
   },
   {
     path: '/movie/:id',

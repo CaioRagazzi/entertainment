@@ -1,12 +1,12 @@
 <template>
-  <v-toolbar class color="primary" dark v-model="show">
+  <v-toolbar color="primary" dark v-model="show" max-height="96px">
     <v-app-bar-nav-icon @click="toggleSideBar"></v-app-bar-nav-icon>
     <v-toolbar-title>{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-col sm="2" class="pt-5">
-      <v-text-field class="pt-3" label="Search"></v-text-field>
+      <v-text-field class="pt-3" label="Search" v-model="searchField"></v-text-field>
     </v-col>
-    <v-btn icon>
+    <v-btn @click="goToSearch()" icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
   </v-toolbar>
@@ -19,7 +19,8 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      show: true
+      show: true,
+      searchField: ""
     };
   },
   computed: {
@@ -30,7 +31,17 @@ export default {
   methods: {
     ...mapActions({
       toggleSideBar: "sideBar/toggleSideBar"
-    })
+    }),
+    goToSearch() {
+      if (this.searchField.trim() === "") {
+        return;
+      } else {
+        this.$router.push({
+          name: "SearchAll",
+          params: { searchWord: this.searchField }
+        });
+      }
+    }
   }
 };
 </script>
