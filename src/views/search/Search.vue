@@ -4,7 +4,7 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
     <div>
-      <Grid :data="casts" :loading="isLoading" type="cast" />
+      <Grid :data="data" :loading="isLoading" type="cast" />
       <div>
         <v-pagination
           :length="totalPages"
@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      casts: [],
+      data: [],
       currentPage: 1,
       totalPages: 0,
       isLoading: true,
@@ -47,9 +47,9 @@ export default {
     }),
     search() {
       this.isLoading = true;
-      HTTP.get("search/multi", { params: { query: this.searchWord } }).then(
+      HTTP.get("search/multi", { params: { query: this.searchWord, page: this.currentPage  } }).then(
         res => {
-          this.casts = res.data.results;
+          this.data = res.data.results;
           this.totalPages = res.data.total_pages;
           this.isLoading = false;
         }
