@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-text-field label="Movie" :value="searchInfo" @input="setSearchInfo" outlined></v-text-field>
-    <v-btn color="info" @click="getMovies">Search</v-btn>
+    <v-btn color="info" @click="getData">Search</v-btn>
     <div class="pt-3">
       <div v-if="isLoading" class="d-flex justify-center">
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
@@ -13,7 +13,7 @@
       </v-snackbar>
       <div>
         <v-pagination
-          v-if="data.length > 0"
+          v-if="data.length > 0 "
           :length="totalPages"
           :value="currentPage"
           :total-visible="8"
@@ -47,7 +47,7 @@ export default {
         this.isAlert = true;
       }
     }
-  },
+  }
 };
 </script>
 

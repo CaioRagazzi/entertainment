@@ -7,8 +7,9 @@ export const dataMixins = {
         this.setTitle(this.componentName);
         if (this.data.length === 0 || this.source !== this.componentName) {
             this.setSource(this.componentName);
+            this.setSearchInfo(" ");
             this.setCurrentPage(1);
-            this.getMovies();
+            this.getData();
         }
     },
     computed: {
@@ -31,7 +32,7 @@ export const dataMixins = {
             setCurrentPage: "data/setCurrentPage",
             setSearchInfo: "data/setSearchInfo"
         }),
-        getMovies() {
+        getData() {
             this.setData([])
             this.setIsLoading(true);
             HTTP.get(this.url, {
@@ -46,7 +47,7 @@ export const dataMixins = {
         },
         changePage(event) {
             this.setCurrentPage(event);
-            this.getMovies();
+            this.getData();
             window.scrollTo(0, 0);
         }
     }
