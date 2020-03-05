@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div v-if="loading" class="d-flex justify-center align-center">
+    <div v-if="isLoading" class="d-flex justify-center align-center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </div>
     <div>
-      <Grid :data="movies" :loading="loading" type="movie" />
+      <Grid :data="data" :loading="isLoading" type="movie" />
       <div>
         <v-pagination
           :length="totalPages"
-          v-model="currentPage"
+          :value="currentPage"
           :total-visible="8"
           @input="changePage"
         ></v-pagination>
@@ -18,46 +18,20 @@
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
 import Grid from "../../components/grid/Grid";
-import { mapActions } from "vuex";
+import { dataMixins } from "../../mixins/data";
 
 export default {
-  name: "Popular",
+  name: "PopularMovies",
   components: {
     Grid
   },
+  mixins: [dataMixins],
   data() {
     return {
-      movies: [],
-      currentPage: 1,
-      totalPages: 0,
-      loading: true
+      url: "movie/popular",
+      componentName: "Popular Movies"
     };
-  },
-  created() {
-    this.getMovies();
-    this.setTitle("Popular");
-  },
-  methods: {
-    ...mapActions({
-      setTitle: "navBar/setTitle"
-    }),
-    getMovies() {
-      this.loading = true;
-      HTTP.get("movie/popular", {
-        params: { page: this.currentPage }
-      }).then(res => {
-        this.movies = res.data.results;
-        this.totalPages = res.data.total_pages;
-        this.loading = false;
-      });
-    },
-    changePage(event) {
-      this.currentPage = event;
-      this.getMovies();
-      window.scrollTo(0, 0);
-    }
   }
 };
 </script>

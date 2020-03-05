@@ -14,16 +14,9 @@ const mutations = {
     }
 }
 
-const actions = {
-    setTitle({ commit }, title) {
-        commit('setTitle', title)
-    }
-}
-
 export default {
     namespaced: true,
     state,
     getters,
-    actions,
     mutations
 }

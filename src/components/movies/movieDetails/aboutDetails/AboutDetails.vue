@@ -7,7 +7,7 @@
 
 <script>
 import { HTTP } from "../../../../plugins/axios";
-import { mapActions } from "vuex";
+import { mapMutations } from "vuex";
 import CarouselImages from "./CarouselImages";
 import MovieInfo from "./MovieInfo";
 
@@ -25,7 +25,7 @@ export default {
     this.setTitle();
   },
   methods: {
-    ...mapActions({
+    ...mapMutations({
       setTitleNav: "navBar/setTitle"
     }),
     setTitle() {
