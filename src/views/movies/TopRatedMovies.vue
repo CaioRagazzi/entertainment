@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       url: "movie/top_rated",
-      componentName: "Top Rated"
+      componentName: "Top Rated Movies"
     };
   },
 };

@@ -45,6 +45,9 @@ const mutations = {
         state.source = source;
     },
     setSearchInfo(state, searchInfo) {
+        if (searchInfo === "") {
+            return
+        }
         state.searchInfo = searchInfo;
     }
 }

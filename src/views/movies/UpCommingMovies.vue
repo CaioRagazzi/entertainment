@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       url: "movie/upcoming",
-      componentName: "UpCommingMovies"
+      componentName: "UpComming Movies"
     };
   },
 };

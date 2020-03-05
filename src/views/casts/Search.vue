@@ -41,13 +41,6 @@ export default {
       isAlert: false
     };
   },
-  watch: {
-    totalResults: function(newVal) {
-      if (newVal === 0) {
-        this.isAlert = true;
-      }
-    }
-  }
 };
 </script>
 

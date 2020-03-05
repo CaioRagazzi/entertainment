@@ -1,21 +1,21 @@
 <template>
   <v-container>
-    <v-text-field label="Movie" v-model="searchInfo" outlined></v-text-field>
-    <v-btn color="info" @click="search">Search</v-btn>
+    <v-text-field label="Movie" :value="searchInfo" @input="setSearchInfo" outlined></v-text-field>
+    <v-btn color="info" @click="getData">Search</v-btn>
     <div class="pt-3">
       <div v-if="isLoading" class="d-flex justify-center">
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
       </div>
-      <Grid v-else :data="movies" :loading="isLoading" type="tv" />
+      <Grid v-else :data="data" :loading="isLoading" type="tv" />
       <v-snackbar v-model="isAlert" top right color="warning">
         <b class="black--text">Your search returned zero results</b>
         <v-btn color="black" text @click="isAlert = false">Close</v-btn>
       </v-snackbar>
       <div>
         <v-pagination
-          v-if="movies.length > 0"
+          v-if="data.length > 0"
           :length="totalPages"
-          v-model="currentPage"
+          :value="currentPage"
           :total-visible="8"
           @input="changePage"
         ></v-pagination>
@@ -25,57 +25,22 @@
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
 import Grid from "../../components/grid/Grid";
-import { mapActions } from "vuex";
+import { dataMixins } from "../../mixins/data";
 
 export default {
-  name: "SearchTV",
+  name: "SearchTvShows",
   components: {
     Grid
   },
-  created() {
-    this.setTitle("Search TV Shows");
-  },
+  mixins: [dataMixins],
   data() {
     return {
-      searchInfo: "",
-      isLoading: false,
-      movies: [],
-      totalPages: 0,
-      currentPage: 1,
-      totalResults: undefined,
+      url: "search/tv",
+      componentName: "Search TV Shows",
       isAlert: false
     };
   },
-  watch: {
-    totalResults: function(newVal) {
-      if (newVal === 0) {
-        this.isAlert = true;
-      }
-    }
-  },
-  methods: {
-    ...mapActions({
-      setTitle: "navBar/setTitle"
-    }),
-    search() {
-      this.isLoading = true;
-      HTTP.get("search/tv", {
-        params: { page: this.currentPage, query: this.searchInfo }
-      }).then(res => {
-        this.movies = res.data.results;
-        this.totalPages = res.data.total_pages;
-        this.totalResults = res.data.total_results;
-        this.isLoading = false;
-      });
-    },
-    changePage(event) {
-      this.currentPage = event;
-      this.search();
-      window.scrollTo(0, 0);
-    }
-  }
 };
 </script>
 
