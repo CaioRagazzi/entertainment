@@ -4,7 +4,7 @@ const state = {
     totalPages: 0,
     isLoading: true,
     source: "",
-    searchInfo: " ",
+    searchInfo: "",
 }
 
 const getters = {
@@ -45,9 +45,6 @@ const mutations = {
         state.source = source;
     },
     setSearchInfo(state, searchInfo) {
-        if (searchInfo === "") {
-            return
-        }
         state.searchInfo = searchInfo;
     }
 }

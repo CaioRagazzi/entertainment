@@ -38,7 +38,8 @@ export default {
     return {
       url: "search/tv",
       componentName: "Search TV Shows",
-      isAlert: false
+      isAlert: false,
+      search: true
     };
   },
 };

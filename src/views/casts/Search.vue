@@ -38,9 +38,10 @@ export default {
     return {
       url: "search/person",
       componentName: "Search Person",
-      isAlert: false
+      isAlert: false,
+      search: true
     };
-  },
+  }
 };
 </script>
 

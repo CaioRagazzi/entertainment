@@ -5,11 +5,25 @@ import { HTTP } from "../plugins/axios";
 export const dataMixins = {
     created() {
         this.setTitle(this.componentName);
-        if (this.data.length === 0 || this.source !== this.componentName) {
+
+        if (this.searchFromNav) {
+            this.setData([])
+            this.setSearchInfo(this.$route.params.searchWord)
             this.setSource(this.componentName);
-            this.setSearchInfo(" ");
             this.setCurrentPage(1);
-            this.getData();
+            this.getData()
+            return
+        }
+
+        if (this.data.length === 0 || this.source !== this.componentName) {
+            this.setData([])
+            this.setSearchInfo("")
+            this.setSource(this.componentName);
+            this.setCurrentPage(1);
+            if (!this.search) {
+                this.getData();
+            }
+            return
         }
     },
     computed: {
@@ -33,12 +47,14 @@ export const dataMixins = {
             setSearchInfo: "data/setSearchInfo"
         }),
         getData() {
-            this.setData([])
             this.setIsLoading(true);
             HTTP.get(this.url, {
-                params: { page: this.currentPage, query: this.searchInfo }
+                params: { page: this.currentPage, query: this.searchInfo === "" ? " " : this.searchInfo }
             }).then(
                 res => {
+                    if (res.data.results.length === 0) {
+                        this.isAlert = true
+                    }
                     this.setData(res.data.results);
                     this.setTotalPages(res.data.total_pages);
                     this.setIsLoading(false);

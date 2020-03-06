@@ -8,7 +8,7 @@
       <div>
         <v-pagination
           :length="totalPages"
-          v-model="currentPage"
+          :value="currentPage"
           :total-visible="8"
           @input="changePage"
         ></v-pagination>
@@ -18,48 +18,21 @@
 </template>
 
 <script>
-import { HTTP } from "../../plugins/axios";
 import Grid from "../../components/grid/Grid";
-import { mapActions } from "vuex";
+import { dataMixins } from "../../mixins/data";
 
 export default {
   name: "SearchAll",
   components: {
     Grid
   },
+  mixins: [dataMixins],
   data() {
     return {
-      data: [],
-      currentPage: 1,
-      totalPages: 0,
-      isLoading: true,
-      searchWord: ""
+      url: "search/multi",
+      componentName: "Searching",
+      searchFromNav: true
     };
-  },
-  created() {
-    this.searchWord = this.$route.params.searchWord;
-    this.setTitle(`Searching ${this.searchWord}`);
-    this.search();
-  },
-  methods: {
-    ...mapActions({
-      setTitle: "navBar/setTitle"
-    }),
-    search() {
-      this.isLoading = true;
-      HTTP.get("search/multi", { params: { query: this.searchWord, page: this.currentPage  } }).then(
-        res => {
-          this.data = res.data.results;
-          this.totalPages = res.data.total_pages;
-          this.isLoading = false;
-        }
-      );
-    },
-    changePage(event) {
-      this.currentPage = event;
-      this.search();
-      window.scrollTo(0, 0);
-    }
   }
 };
 </script>
