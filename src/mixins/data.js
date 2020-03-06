@@ -28,6 +28,17 @@ export const dataMixins = {
             return
         }
     },
+    watch: {
+        '$route.params.searchWord': function () {
+            this.setData([])
+            if (this.$route.params.searchWord) {
+                this.setSearchInfo(this.$route.params.searchWord)
+            }
+            this.setSource(this.componentName);
+            this.setCurrentPage(1);
+            this.getData()
+        }
+    },
     computed: {
         ...mapGetters({
             data: "data/getData",

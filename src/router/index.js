@@ -82,7 +82,7 @@ const routes = [
     component: SearchTV
   },
   {
-    path: '/All/Search',
+    path: '/All/:searchWord',
     name: 'SearchAll',
     component: SearchAll
   },

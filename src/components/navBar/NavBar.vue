@@ -4,11 +4,15 @@
     <v-toolbar-title>{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-col sm="2" class="pt-5">
-      <v-text-field class="pt-3" label="Search" v-model="searchText"></v-text-field>
+      <v-text-field class="pt-3" @keydown.enter="goToSearch()" label="Search" v-model="searchText"></v-text-field>
     </v-col>
     <v-btn @click="goToSearch()" icon>
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
+    <v-snackbar v-model="isAlert" bottom left color="warning">
+      <b class="black--text">Already searched!</b>
+      <v-btn color="black" text @click="isAlert = false">Close</v-btn>
+    </v-snackbar>
   </v-toolbar>
 </template>
 
@@ -21,7 +25,8 @@ export default {
   data() {
     return {
       show: true,
-      searchText: ""
+      searchText: "",
+      isAlert: false
     };
   },
   computed: {
@@ -41,10 +46,14 @@ export default {
       if (this.searchText.trim() === "") {
         return;
       } else {
-        this.$router.push({
-          name: "SearchAll",
-          params: { searchWord: this.searchText }
-        });
+        this.$router
+          .push({
+            name: "SearchAll",
+            params: { searchWord: this.searchText }
+          })
+          .catch(() => {
+            this.isAlert = true
+          });
       }
     }
   }

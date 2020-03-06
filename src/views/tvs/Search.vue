@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-text-field label="TV Show" :value="searchInfo" @input="setSearchInfo" outlined></v-text-field>
+    <v-text-field label="TV Show" @keydown.enter="getData" :value="searchInfo" @input="setSearchInfo" outlined></v-text-field>
     <v-btn color="info" @click="getData">Search</v-btn>
     <div class="pt-3">
       <div v-if="isLoading" class="d-flex justify-center">
