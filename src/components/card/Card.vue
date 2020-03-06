@@ -43,7 +43,7 @@ export default {
         this.$router.push({ name: "MovieDetails", params: { id: this.id } });
         return;
       }
-      if (this.type === "cast") {
+      if (this.type === "cast" || this.type === "person") {
         this.$router.push({ name: "CastDetails", params: { id: this.id } });
         return;
       }
@@ -63,7 +63,7 @@ export default {
           image
         );
       }
-      if (this.type === "cast") {
+      if (this.type === "cast" || this.type === "person") {
         return (
           this.configuration.images.secure_base_url +
           this.configuration.images.poster_sizes[4] +
@@ -71,13 +71,6 @@ export default {
         );
       }
       if (this.type === "tv" || this.type === "season") {
-        return (
-          this.configuration.images.secure_base_url +
-          this.configuration.images.poster_sizes[4] +
-          image
-        );
-      }
-      if (this.type === "season") {
         return (
           this.configuration.images.secure_base_url +
           this.configuration.images.poster_sizes[4] +

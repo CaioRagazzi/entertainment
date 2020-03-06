@@ -6,9 +6,11 @@ export const dataMixins = {
     created() {
         this.setTitle(this.componentName);
 
-        if (this.searchFromNav) {
+        if (this.searchFromNav && (this.data.length === 0 || this.source !== this.componentName)) {
             this.setData([])
-            this.setSearchInfo(this.$route.params.searchWord)
+            if (this.$route.params.searchWord) {
+                this.setSearchInfo(this.$route.params.searchWord)
+            }
             this.setSource(this.componentName);
             this.setCurrentPage(1);
             this.getData()
