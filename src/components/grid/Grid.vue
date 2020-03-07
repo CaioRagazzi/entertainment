@@ -8,6 +8,7 @@
       :loading="loading"
       :title="getTitle(item)"
       :type="getType(item)"
+      :seasonNumber="item.season_number"
     />
   </div>
 </template>
@@ -35,6 +36,9 @@ export default {
       if (this.type === "cast" || item.media_type === "person") {
         return item.profile_path;
       }
+      if (this.type === "episode") {
+        return item.still_path;
+      }
     },
     getTitle(item) {
       if (this.type === "movie" || item.media_type === "movie") {
@@ -45,7 +49,8 @@ export default {
         item.media_type === "person" ||
         this.type === "tv" ||
         item.media_type === "tv" ||
-        this.type === "season"
+        this.type === "season" ||
+        this.type === "episode"
       ) {
         return item.name;
       }

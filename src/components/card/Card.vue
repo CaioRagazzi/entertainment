@@ -27,17 +27,22 @@
 
 <script>
 import { configurationMixins } from "../../mixins/configuration";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Card",
   mixins: [configurationMixins],
-  props: ["image", "id", "loading", "title", "type"],
+  props: ["image", "id", "loading", "title", "type", "seasonNumber"],
   data() {
     return {
       loadingConfig: true
     };
   },
   methods: {
+    ...mapMutations({
+      setShowModal: "episodes/setShowModal",
+      setSeasonNumber: "episodes/setSeasonNumber"
+    }),
     goToDetails() {
       if (this.type === "movie") {
         this.$router.push({ name: "MovieDetails", params: { id: this.id } });
@@ -49,6 +54,11 @@ export default {
       }
       if (this.type === "tv") {
         this.$router.push({ name: "TVDetails", params: { id: this.id } });
+        return;
+      }
+      if (this.type === "season") {
+        this.setSeasonNumber(this.seasonNumber);
+        this.setShowModal(true);
         return;
       }
     },
@@ -74,6 +84,13 @@ export default {
         return (
           this.configuration.images.secure_base_url +
           this.configuration.images.poster_sizes[4] +
+          image
+        );
+      }
+      if (this.type === "episode") {
+        return (
+          this.configuration.images.secure_base_url +
+          this.configuration.images.still_sizes[3] +
           image
         );
       }

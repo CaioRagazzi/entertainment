@@ -6,31 +6,15 @@ export const dataMixins = {
     created() {
         this.setTitle(this.componentName);
 
-        let samePage = this.data.length === 0 || this.source !== this.componentName
-
-        if (samePage) {
-            this.setData([])
-            if (this.$route.params.searchWord) {
-                this.setSearchInfo(this.$route.params.searchWord)
-            } else {
-                this.setSearchInfo("")
-            }
-            this.setSource(this.componentName);
-            this.setCurrentPage(1);
-            if (!this.search) {
-                this.getData();
-            }
+        let isSamePage = this.data.length === 0 || this.source !== this.componentName
+        
+        if (isSamePage) {
+            this.defaultSearch()
         }
     },
     watch: {
         '$route.params.searchWord': function () {
-            this.setData([])
-            if (this.$route.params.searchWord) {
-                this.setSearchInfo(this.$route.params.searchWord)
-            }
-            this.setSource(this.componentName);
-            this.setCurrentPage(1);
-            this.getData()
+            this.defaultSearch()
         }
     },
     computed: {
@@ -59,12 +43,21 @@ export const dataMixins = {
                 params: { page: this.currentPage, query: this.searchInfo === "" ? " " : this.searchInfo }
             }).then(
                 res => {
-                    if (res.data.results.length === 0) {
-                        this.isAlert = true
+                    console.log(res.data);
+                    if (res.data.episodes) {
+                        this.setData(res.data.episodes);
+                        this.setTotalPages(0);
+                        this.setIsLoading(false);
+                        return
+                    } else {
+                        if (res.data.results.length === 0) {
+                            this.isAlert = true
+                            return
+                        }
+                        this.setData(res.data.results);
+                        this.setTotalPages(res.data.total_pages);
+                        this.setIsLoading(false);
                     }
-                    this.setData(res.data.results);
-                    this.setTotalPages(res.data.total_pages);
-                    this.setIsLoading(false);
                 }
             );
         },
@@ -72,6 +65,19 @@ export const dataMixins = {
             this.setCurrentPage(event);
             this.getData();
             window.scrollTo(0, 0);
+        },
+        defaultSearch() {
+            this.setData([])
+            if (this.$route.params.searchWord) {
+                this.setSearchInfo(this.$route.params.searchWord)
+            } else {
+                this.setSearchInfo("")
+            }
+            this.setSource(this.componentName);
+            this.setCurrentPage(1);
+            if (!this.search) {
+                this.getData();
+            }
         }
     }
 }
