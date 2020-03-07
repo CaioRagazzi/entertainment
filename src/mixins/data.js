@@ -34,7 +34,8 @@ export const dataMixins = {
             setTotalPages: "data/setTotalPages",
             setSource: "data/setSource",
             setCurrentPage: "data/setCurrentPage",
-            setSearchInfo: "data/setSearchInfo"
+            setSearchInfo: "data/setSearchInfo",
+            setSeasonOverview: "episodes/setSeasonOverview",
         }),
         getData() {
             this.setIsLoading(true);
@@ -44,6 +45,7 @@ export const dataMixins = {
                 res => {
                     if (res.data.episodes) {
                         this.setData(res.data.episodes);
+                        this.setSeasonOverview(res.data.overview)
                         this.setTotalPages(0);
                         this.setIsLoading(false);
                         return

@@ -41,7 +41,8 @@ export default {
   methods: {
     ...mapMutations({
       setShowModal: "episodes/setShowModal",
-      setSeasonNumber: "episodes/setSeasonNumber"
+      setSeasonNumber: "episodes/setSeasonNumber",
+      setSeasonImage: "episodes/setSeasonImage"
     }),
     goToDetails() {
       if (this.type === "movie") {
@@ -57,6 +58,7 @@ export default {
         return;
       }
       if (this.type === "season") {
+        this.setSeasonImage(this.getImage(this.image));
         this.setSeasonNumber(this.seasonNumber);
         this.setShowModal(true);
         return;

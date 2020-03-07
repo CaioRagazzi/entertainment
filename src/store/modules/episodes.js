@@ -2,7 +2,9 @@ const state = {
     tvId: 0,
     seasonNumber: 0,
     episodeNumber: 0,
-    showModal: false
+    showModal: false,
+    seasonImage: "",
+    seasonOverview: ""
 }
 
 const getters = {
@@ -17,6 +19,12 @@ const getters = {
     },
     getShowModal: state => {
         return state.showModal
+    },
+    getSeasonImage: state => {
+        return state.seasonImage
+    },
+    getSeasonOverview: state => {
+        return state.seasonOverview
     }
 }
 
@@ -32,6 +40,12 @@ const mutations = {
     },
     setShowModal(state, showModal) {
         state.showModal = showModal;
+    },
+    setSeasonImage(state, seasonImage) {
+        state.seasonImage = seasonImage
+    },
+    setSeasonOverview(state, seasonOverview) {
+        state.seasonOverview = seasonOverview
     }
 }
 

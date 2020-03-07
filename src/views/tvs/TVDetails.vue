@@ -25,12 +25,16 @@
 <script>
 import AboutDetails from "../../components/tvs/aboutDetails/AboutDetails";
 import Seasons from "../../components/tvs/aboutDetails/Seasons";
+import { mapMutations } from "vuex";
 
 export default {
   name: "TVDetails",
   components: {
     AboutDetails,
     Seasons
+  },
+  created() {
+    this.setTvId(this.$route.params.id);
   },
   data() {
     return {
@@ -44,6 +48,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setTvId: "episodes/setTvId"
+    }),
     goBack() {
       this.$router.go(-1);
     }
