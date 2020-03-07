@@ -6,26 +6,20 @@ export const dataMixins = {
     created() {
         this.setTitle(this.componentName);
 
-        if (this.searchFromNav && (this.data.length === 0 || this.source !== this.componentName)) {
+        let samePage = this.data.length === 0 || this.source !== this.componentName
+
+        if (samePage) {
             this.setData([])
             if (this.$route.params.searchWord) {
                 this.setSearchInfo(this.$route.params.searchWord)
+            } else {
+                this.setSearchInfo("")
             }
-            this.setSource(this.componentName);
-            this.setCurrentPage(1);
-            this.getData()
-            return
-        }
-
-        if (this.data.length === 0 || this.source !== this.componentName) {
-            this.setData([])
-            this.setSearchInfo("")
             this.setSource(this.componentName);
             this.setCurrentPage(1);
             if (!this.search) {
                 this.getData();
             }
-            return
         }
     },
     watch: {
