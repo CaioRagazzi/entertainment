@@ -1,5 +1,4 @@
-import { mapMutations } from "vuex";
-import { mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import { HTTP } from "../plugins/axios";
 
 export const dataMixins = {
@@ -8,7 +7,7 @@ export const dataMixins = {
 
         let isSamePage = this.data.length === 0 || this.source !== this.componentName
         
-        if (isSamePage) {
+        if (isSamePage || this.modal) {
             this.defaultSearch()
         }
     },
@@ -43,7 +42,6 @@ export const dataMixins = {
                 params: { page: this.currentPage, query: this.searchInfo === "" ? " " : this.searchInfo }
             }).then(
                 res => {
-                    console.log(res.data);
                     if (res.data.episodes) {
                         this.setData(res.data.episodes);
                         this.setTotalPages(0);
