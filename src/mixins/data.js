@@ -5,9 +5,10 @@ export const dataMixins = {
     created() {
         this.setTitle(this.componentName);
 
-        let isSamePage = this.data.length === 0 || this.source !== this.componentName
-        
-        if (isSamePage || this.modal) {
+        let samePage = this.source !== this.componentName
+        let isneedToSearchAgain = this.data.length === 0 || samePage
+
+        if (isneedToSearchAgain) {
             this.defaultSearch()
         }
     },
@@ -43,21 +44,14 @@ export const dataMixins = {
                 params: { page: this.currentPage, query: this.searchInfo === "" ? " " : this.searchInfo }
             }).then(
                 res => {
-                    if (res.data.episodes) {
-                        this.setData(res.data.episodes);
-                        this.setSeasonOverview(res.data.overview)
-                        this.setTotalPages(0);
-                        this.setIsLoading(false);
+                    if (res.data.results.length === 0) {
+                        this.isAlert = true
                         return
-                    } else {
-                        if (res.data.results.length === 0) {
-                            this.isAlert = true
-                            return
-                        }
-                        this.setData(res.data.results);
-                        this.setTotalPages(res.data.total_pages);
-                        this.setIsLoading(false);
                     }
+                    this.setData(res.data.results);
+                    this.setTotalPages(res.data.total_pages);
+                    this.setIsLoading(false);
+
                 }
             );
         },

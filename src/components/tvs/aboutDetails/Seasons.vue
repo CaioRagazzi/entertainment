@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap justify-center pt-3">
     <Grid :data="seasons" :loading="isSeasonsLoading" type="season" />
-    <ModalGrid v-if="getShowModal" :url="url" type="episode" />
+    <ModalGrid v-if="getShowModal" :tvId="id" />
   </div>
 </template>
 
@@ -26,12 +26,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getSeasonNumber: "episodes/getSeasonNumber",
       getShowModal: "episodes/getShowModal"
-    }),
-    url: function() {
-      return `/tv/${this.id}/season/${this.getSeasonNumber}`;
-    }
+    })
   },
   created() {
     this.getSeasons();
