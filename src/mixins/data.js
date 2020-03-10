@@ -46,6 +46,7 @@ export const dataMixins = {
                 res => {
                     if (res.data.results.length === 0) {
                         this.isAlert = true
+                        this.setIsLoading(false);
                         return
                     }
                     this.setData(res.data.results);

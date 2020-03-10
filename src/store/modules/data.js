@@ -2,7 +2,7 @@ const state = {
     data: [],
     currentPage: 1,
     totalPages: 0,
-    isLoading: true,
+    isLoading: false,
     source: "",
     searchInfo: "",
 }
